@@ -26,7 +26,12 @@ func (s Section) Valid() bool {
 	if s.Start < 1 || s.End < s.Start {
 		return false
 	}
-	switch s.Weeks {
+	// weeks 没有显式给出时，按“每周”处理。
+	weeks := s.Weeks
+	if weeks == "" {
+		weeks = AllWeeks
+	}
+	switch weeks {
 	case AllWeeks, OddWeeks, EvenWeeks:
 		return true
 	}
