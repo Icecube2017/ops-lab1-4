@@ -54,4 +54,8 @@ func TestConflictEndpoint(t *testing.T) {
 	if rec := post(`{"a":{"weekday":9,"start":1,"end":2,"weeks":"all"},"b":{"weekday":1,"start":1,"end":2,"weeks":"all"}}`); rec.Code != http.StatusBadRequest {
 		t.Errorf("不合法时段应返回 400，实际 %d", rec.Code)
 	}
+	// weeks 是必填字段，省略它属于不合法时段。
+	if rec := post(`{"a":{"id":"A","weekday":1,"start":1,"end":2},"b":{"id":"B","weekday":1,"start":1,"end":2}}`); rec.Code != http.StatusBadRequest {
+		t.Errorf("缺少 weeks 字段应返回 400，实际 %d，响应 %q", rec.Code, rec.Body.String())
+	}
 }
