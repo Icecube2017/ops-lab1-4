@@ -27,7 +27,7 @@ func (s Section) Valid() bool {
 		return false
 	}
 	switch s.Weeks {
-	case AllWeeks, OddWeeks, EvenWeeks:
+	case AllWeeks, EvenWeeks:
 		return true
 	}
 	return false
