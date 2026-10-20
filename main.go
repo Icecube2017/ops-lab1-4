@@ -40,6 +40,8 @@ func newMux() *http.ServeMux {
 	// “线上跑的是什么”：一次请求回答版本号、提交号、构建号。
 	mux.HandleFunc("GET /version", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
+		// 部署和回退后，版本查询必须返回当前进程的信息。
+		w.Header().Set("Cache-Control", "no-store")
 		json.NewEncoder(w).Encode(currentVersion())
 	})
 

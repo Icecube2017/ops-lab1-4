@@ -1,0 +1,60 @@
++ date -u '+%Y-%m-%dT%H:%M:%SZ'
+2026-10-20T10:15:32Z
++ uname -a
+Linux lima-lab1-runtime 6.18.22-0-virt #1-Alpine SMP PREEMPT_DYNAMIC 2026-04-11 15:53:25 aarch64 Linux
++ cat /etc/os-release
+NAME="Alpine Linux"
+ID=alpine
+VERSION_ID=3.23.4
+PRETTY_NAME="Alpine Linux v3.23"
+HOME_URL="https://alpinelinux.org/"
+BUG_REPORT_URL="https://gitlab.alpinelinux.org/alpine/aports/-/issues"
++ printf '%s\n' 'Execution: original Linux amd64 release via qemu-x86_64 user-mode emulation in an arm64 Alpine Linux VZ virtual machine.'
+Execution: original Linux amd64 release via qemu-x86_64 user-mode emulation in an arm64 Alpine Linux VZ virtual machine.
++ qemu-x86_64 --version
+qemu-x86_64 version 10.1.5
+Copyright (c) 2003-2025 Fabrice Bellard and the QEMU Project developers
++ cd /mnt/lab1
++ sha256sum enroll-conflict_1.0.0_linux_amd64.tar.gz
+0d873c5b3c6de56d0de987a81c5760e92840b8bdc7f38d45ef15d6d0ef1cb33b  enroll-conflict_1.0.0_linux_amd64.tar.gz
++ sha256sum+ cut enroll-conflict_1.0.0_linux_amd64.tar.gz
+ -d ' ' -f1
++ test 0d873c5b3c6de56d0de987a81c5760e92840b8bdc7f38d45ef15d6d0ef1cb33b '=' 0d873c5b3c6de56d0de987a81c5760e92840b8bdc7f38d45ef15d6d0ef1cb33b
++ file enroll-conflict_1.0.0_linux_amd64/enroll-conflict
+enroll-conflict_1.0.0_linux_amd64/enroll-conflict: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), statically linked, Go BuildID=82b7GoA3VYH9NB3lPqzI/DqERt5qzmooggGb6bBVW/f_e8iBAkTvDwnnlF5uS1/xND8KORdfILdDwIfO6E5, BuildID[sha1]=7fb76d21f931ad2f27a158d755a2ab0ff909db49, with debug_info, not stripped
++ sha256sum enroll-conflict_1.0.0_linux_amd64/enroll-conflict
+c49bfa8a97649f0f3f55536ebe9a120cb746e09412912ad9709c8485f0472dd5  enroll-conflict_1.0.0_linux_amd64/enroll-conflict
++ cat enroll-conflict_1.0.0_linux_amd64/BUILD_INFO
+name=enroll-conflict
+version=1.0.0
+build_no=1
+run_id=39395666401
+commit=bc4b49ed0ea5becd29c643476e65b0b5834fb724
+go=go1.26.9
++ qemu-x86_64 enroll-conflict_1.0.0_linux_amd64/enroll-conflict -version
+enroll-conflict version=1.0.0 commit=bc4b49ed0ea5becd29c643476e65b0b5834fb724 build_no=1 go=go1.26.9
++ server_pid=2346
++ trap+ qemu-x86_64 'kill "$server_pid" 2>/dev/null || true; wait "$server_pid" 2>/dev/null || true' EXIT enroll-conflict_1.0.0_linux_amd64/enroll-conflict -addr INT TERM 127.0.0.1:18080
+
++ attempt=0
++ curl --silent --fail --max-time 2 http://127.0.0.1:18080/version
++ kill -0 2346
++ attempt=1
++ test 1 -lt 50
++ sleep 0.2
++ curl --silent --fail --max-time 2 http://127.0.0.1:18080/version
++ cat v1.0.0-version-response.json
+{"version":"1.0.0","commit":"bc4b49ed0ea5becd29c643476e65b0b5834fb724","build_no":"1","go":"go1.26.9"}
++ cat v1.0.0-version-response.json
++ test '{"version":"1.0.0","commit":"bc4b49ed0ea5becd29c643476e65b0b5834fb724","build_no":"1","go":"go1.26.9"}' '=' '{"version":"1.0.0","commit":"bc4b49ed0ea5becd29c643476e65b0b5834fb724","build_no":"1","go":"go1.26.9"}'
++ curl --fail --silent --show-error http://127.0.0.1:18080/healthz
+ok
++ kill 2346
++ wait 2346
+Terminated
++ true
++ trap - EXIT INT TERM
++ curl --fail --silent --show-error --max-time 2 http://127.0.0.1:18080/version
+curl: (7) Failed to connect to 127.0.0.1:18080 after 0 ms: Could not connect to server
++ set +x
+PASS: original release identity verified through live HTTP; test service terminated and loopback listener closed.
