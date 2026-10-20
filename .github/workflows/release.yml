@@ -1,0 +1,89 @@
+
+name: release
+
+on:
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-24.04
+
+    steps:
+      # Fetch full history for the release gate
+      - name: Checkout repository
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      # TODO 1: Only commits in main history can be released
+      - name: Release gate
+        env:
+          SOURCE_SHA: ${{ github.sha }}
+        run: |
+          git fetch origin +refs/heads/main:refs/remotes/origin/main
+
+          if ! git merge-base --is-ancestor "$SOURCE_SHA" origin/main; then
+            echo "::error::Release rejected: commit is not in main history"
+            exit 1
+          fi
+
+          echo "Release gate passed: $SOURCE_SHA"
+
+      # TODO 2: Set up Go and run quality checks
+      - name: Set up Go
+        uses: actions/setup-go@v7
+        with:
+          go-version: '1.26.9'
+          cache: false
+
+      - name: Format check
+        run: make fmt-check
+
+      - name: Vet
+        run: make vet
+
+      - name: Test
+        run: make test
+
+      # TODO 3: Build versioned artifact
+      - name: Package
+        env:
+          RELEASE_TAG: ${{ github.ref_name }}
+          BUILD_NO: ${{ github.run_number }}
+          RUN_ID: ${{ github.run_id }}
+          COMMIT: ${{ github.sha }}
+        run: |
+          VERSION="${RELEASE_TAG#v}"
+
+          make package \
+            VERSION="$VERSION" \
+            BUILD_NO="$BUILD_NO" \
+            RUN_ID="$RUN_ID" \
+            COMMIT="$COMMIT"
+
+          echo "Binary SHA-256:"
+          sha256sum dist/*/enroll-conflict
+
+          echo "Archive SHA-256:"
+          sha256sum dist/*.tar.gz
+
+          echo "Verify checksum:"
+          (cd dist && sha256sum -c *.tar.gz.sha256)
+
+      # TODO 4: Publish the GitHub Release
+      - name: Create Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: |
+          gh release create "$RELEASE_TAG" \
+            dist/*.tar.gz \
+            dist/*.tar.gz.sha256 \
+            --verify-tag \
+            --title "$RELEASE_TAG" \
+            --notes "Automated release for $RELEASE_TAG"
