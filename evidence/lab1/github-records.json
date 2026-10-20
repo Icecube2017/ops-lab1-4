@@ -1,0 +1,560 @@
+{
+  "repository": "https://github.com/Icecube2017/ops-lab1-4",
+  "sources": {
+    "actions_runs": "https://api.github.com/repos/Icecube2017/ops-lab1-4/actions/runs?per_page=100",
+    "releases": "https://api.github.com/repos/Icecube2017/ops-lab1-4/releases?per_page=100",
+    "tags": "https://api.github.com/repos/Icecube2017/ops-lab1-4/tags?per_page=100",
+    "branches": "https://api.github.com/repos/Icecube2017/ops-lab1-4/branches?per_page=100",
+    "commits": "https://api.github.com/repos/Icecube2017/ops-lab1-4/commits?per_page=100",
+    "pr1_detail": "https://api.github.com/repos/Icecube2017/ops-lab1-4/pulls/1",
+    "pr1_commits": "https://api.github.com/repos/Icecube2017/ops-lab1-4/pulls/1/commits",
+    "pr1_files": "https://api.github.com/repos/Icecube2017/ops-lab1-4/pulls/1/files",
+    "pr1_reviews": "https://api.github.com/repos/Icecube2017/ops-lab1-4/pulls/1/reviews"
+  },
+  "prs": [
+    {
+      "number": 1,
+      "title": "feat: 增加冲突测试用例",
+      "html_url": "https://github.com/Icecube2017/ops-lab1-4/pull/1",
+      "created_at": "2026-10-15T09:59:28Z",
+      "closed_at": "2026-10-15T12:33:41Z",
+      "merged_at": "2026-10-15T12:33:41Z",
+      "merge_commit_sha": "fe8bc546fe879a37f873985a864b631c02247394",
+      "author": "sugeladi2450",
+      "head_sha": "e918261c40630d70c3dff2062e947fd36b60e8b4",
+      "branch": "feat/add-conflict-test",
+      "commits": [
+        {
+          "oid": "3de8f12823499ad7ba886313c6863ead75a84ce7",
+          "authoredDate": "2026-10-15T09:36:04Z",
+          "committedDate": "2026-10-15T09:36:04Z",
+          "shortMessage": "feat: 增加冲突测试用例",
+          "url": "https://github.com/Icecube2017/ops-lab1-4/commit/3de8f12823499ad7ba886313c6863ead75a84ce7"
+        },
+        {
+          "oid": "e918261c40630d70c3dff2062e947fd36b60e8b4",
+          "authoredDate": "2026-10-15T10:07:41Z",
+          "committedDate": "2026-10-15T10:07:41Z",
+          "shortMessage": "fix: 恢复单双周冲突规则",
+          "url": "https://github.com/Icecube2017/ops-lab1-4/commit/e918261c40630d70c3dff2062e947fd36b60e8b4"
+        }
+      ],
+      "reviewers_approved": [
+        "Icecube2017"
+      ],
+      "merge_method": "squash (inferred from one new single-parent commit for all PR commits and commit message)"
+    },
+    {
+      "number": 2,
+      "title": "docs: 填写 LAB1.md 任务四第一轮证据与数据",
+      "html_url": "https://github.com/Icecube2017/ops-lab1-4/pull/2",
+      "created_at": "2026-10-15T13:26:05Z",
+      "closed_at": "2026-10-20T08:38:00Z",
+      "merged_at": "2026-10-20T08:38:00Z",
+      "merge_commit_sha": "fdda8f448a1e96e64a2e134ad2bb1a63af111608",
+      "author": "sugeladi2450",
+      "head_sha": "671c5ef417e4f3dc614ce2f6ad36aa072ef403d3",
+      "branch": "feat/lab1-data",
+      "reviewers_approved": [
+        "Icecube2017"
+      ],
+      "merge_method": "squash (inferred from one new single-parent commit for all PR commits and commit message)"
+    },
+    {
+      "number": 3,
+      "title": "feat:找出一个现有测试无法发现的缺陷(TestValid缺少对OddWeeks检测）",
+      "html_url": "https://github.com/Icecube2017/ops-lab1-4/pull/3",
+      "created_at": "2026-10-16T01:56:38Z",
+      "closed_at": "2026-10-16T01:59:37Z",
+      "merged_at": null,
+      "merge_commit_sha": "da91a46a71afc7209539e0c58ddbc96473098bb8",
+      "author": "Vollerei6",
+      "head_sha": "734541a9df8e126f2016d7defbfbdb356a24dd91",
+      "branch": "test/valid-odd-weeks",
+      "merge_method": null
+    },
+    {
+      "number": 4,
+      "title": "refactor: weeks 字段的零值按每周处理",
+      "html_url": "https://github.com/Icecube2017/ops-lab1-4/pull/4",
+      "created_at": "2026-10-16T02:58:54Z",
+      "closed_at": "2026-10-20T08:36:52Z",
+      "merged_at": "2026-10-20T08:36:52Z",
+      "merge_commit_sha": "6a561b0f6a9e858b1072ef06da1ed61c93166935",
+      "author": "Vollerei6",
+      "head_sha": "07eed8a75d60bbb3bb407f8248f2be03b03fdb2d",
+      "branch": "test/conflict-invalid-weeks",
+      "commits": [
+        {
+          "oid": "56dfb04c6431bf050b86a4c95e6eb17540896c31",
+          "authoredDate": "2026-10-16T10:09:45.000+08:00",
+          "committedDate": "2026-10-16T10:09:48.000+08:00",
+          "shortMessage": "refactor: weeks 字段的零值按每周处理",
+          "url": "/Icecube2017/ops-lab1-4/pull/4/commits/56dfb04c6431bf050b86a4c95e6eb17540896c31"
+        },
+        {
+          "oid": "6f331368993c559826a0ec15db592fe4034bb8c9",
+          "authoredDate": "2026-10-16T11:09:35.000+08:00",
+          "committedDate": "2026-10-16T11:09:35.000+08:00",
+          "shortMessage": "test: 覆盖 weeks 字段缺失时的判断",
+          "url": "/Icecube2017/ops-lab1-4/pull/4/commits/6f331368993c559826a0ec15db592fe4034bb8c9"
+        },
+        {
+          "oid": "07eed8a75d60bbb3bb407f8248f2be03b03fdb2d",
+          "authoredDate": "2026-10-16T11:09:35.000+08:00",
+          "committedDate": "2026-10-16T11:09:35.000+08:00",
+          "shortMessage": "revert: weeks 缺失时不按每周处理",
+          "url": "/Icecube2017/ops-lab1-4/pull/4/commits/07eed8a75d60bbb3bb407f8248f2be03b03fdb2d"
+        }
+      ],
+      "reviewers_approved": [
+        "Icecube2017"
+      ],
+      "merge_method": "squash (inferred from one new single-parent commit for all PR commits and commit message)"
+    },
+    {
+      "number": 5,
+      "title": "ci: add automated release workflow",
+      "html_url": "https://github.com/Icecube2017/ops-lab1-4/pull/5",
+      "created_at": "2026-10-20T05:35:06Z",
+      "closed_at": "2026-10-20T08:38:29Z",
+      "merged_at": "2026-10-20T08:38:29Z",
+      "merge_commit_sha": "bc4b49ed0ea5becd29c643476e65b0b5834fb724",
+      "author": "Graham1019",
+      "head_sha": "626f04103a72be16e93d175747a2abdc093e26ee",
+      "branch": "feat/release-workflow-graham",
+      "commits": [
+        {
+          "oid": "626f04103a72be16e93d175747a2abdc093e26ee",
+          "authoredDate": "2026-10-20T13:32:49.000+08:00",
+          "committedDate": "2026-10-20T13:32:49.000+08:00",
+          "shortMessage": "ci: add release workflow for lab1",
+          "url": "/Icecube2017/ops-lab1-4/pull/5/commits/626f04103a72be16e93d175747a2abdc093e26ee"
+        }
+      ],
+      "reviewers_approved": [
+        "Icecube2017"
+      ],
+      "merge_method": "squash (inferred from one new single-parent commit for all PR commits and commit message)"
+    }
+  ],
+  "workflow_runs": [
+    {
+      "id": 39397895544,
+      "name": "release",
+      "run_number": 2,
+      "run_attempt": 1,
+      "head_branch": "v0.0.1",
+      "head_sha": "b3f193475ca320b3d4063b718b9aa71df4d1087c",
+      "event": "push",
+      "conclusion": "failure",
+      "created_at": "2026-10-20T09:03:31Z",
+      "updated_at": "2026-10-20T09:03:40Z",
+      "run_started_at": "2026-10-20T09:03:31Z",
+      "html_url": "https://github.com/Icecube2017/ops-lab1-4/actions/runs/39397895544",
+      "elapsed_created_to_updated_s": 9
+    },
+    {
+      "id": 39395666401,
+      "name": "release",
+      "run_number": 1,
+      "run_attempt": 1,
+      "head_branch": "v1.0.0",
+      "head_sha": "bc4b49ed0ea5becd29c643476e65b0b5834fb724",
+      "event": "push",
+      "conclusion": "success",
+      "created_at": "2026-10-20T08:45:14Z",
+      "updated_at": "2026-10-20T08:45:46Z",
+      "run_started_at": "2026-10-20T08:45:14Z",
+      "html_url": "https://github.com/Icecube2017/ops-lab1-4/actions/runs/39395666401",
+      "elapsed_created_to_updated_s": 32
+    },
+    {
+      "id": 39394862936,
+      "name": "ci",
+      "run_number": 18,
+      "run_attempt": 1,
+      "head_branch": "main",
+      "head_sha": "bc4b49ed0ea5becd29c643476e65b0b5834fb724",
+      "event": "push",
+      "conclusion": "success",
+      "created_at": "2026-10-20T08:38:32Z",
+      "updated_at": "2026-10-20T08:39:15Z",
+      "run_started_at": "2026-10-20T08:38:32Z",
+      "html_url": "https://github.com/Icecube2017/ops-lab1-4/actions/runs/39394862936",
+      "elapsed_created_to_updated_s": 43
+    },
+    {
+      "id": 39394803195,
+      "name": "ci",
+      "run_number": 17,
+      "run_attempt": 1,
+      "head_branch": "main",
+      "head_sha": "fdda8f448a1e96e64a2e134ad2bb1a63af111608",
+      "event": "push",
+      "conclusion": "success",
+      "created_at": "2026-10-20T08:38:02Z",
+      "updated_at": "2026-10-20T08:38:44Z",
+      "run_started_at": "2026-10-20T08:38:02Z",
+      "html_url": "https://github.com/Icecube2017/ops-lab1-4/actions/runs/39394803195",
+      "elapsed_created_to_updated_s": 42
+    },
+    {
+      "id": 39394670060,
+      "name": "ci",
+      "run_number": 16,
+      "run_attempt": 1,
+      "head_branch": "main",
+      "head_sha": "6a561b0f6a9e858b1072ef06da1ed61c93166935",
+      "event": "push",
+      "conclusion": "success",
+      "created_at": "2026-10-20T08:36:54Z",
+      "updated_at": "2026-10-20T08:37:35Z",
+      "run_started_at": "2026-10-20T08:36:54Z",
+      "html_url": "https://github.com/Icecube2017/ops-lab1-4/actions/runs/39394670060",
+      "elapsed_created_to_updated_s": 41
+    },
+    {
+      "id": 39375685016,
+      "name": "ci",
+      "run_number": 15,
+      "run_attempt": 1,
+      "head_branch": "feat/release-workflow-graham",
+      "head_sha": "626f04103a72be16e93d175747a2abdc093e26ee",
+      "event": "pull_request",
+      "conclusion": "success",
+      "created_at": "2026-10-20T05:35:11Z",
+      "updated_at": "2026-10-20T05:35:36Z",
+      "run_started_at": "2026-10-20T05:35:11Z",
+      "html_url": "https://github.com/Icecube2017/ops-lab1-4/actions/runs/39375685016",
+      "elapsed_created_to_updated_s": 25
+    },
+    {
+      "id": 38844456518,
+      "name": "ci",
+      "run_number": 14,
+      "run_attempt": 1,
+      "head_branch": "test/conflict-invalid-weeks",
+      "head_sha": "07eed8a75d60bbb3bb407f8248f2be03b03fdb2d",
+      "event": "pull_request",
+      "conclusion": "success",
+      "created_at": "2026-10-16T03:13:43Z",
+      "updated_at": "2026-10-16T03:14:13Z",
+      "run_started_at": "2026-10-16T03:13:43Z",
+      "html_url": "https://github.com/Icecube2017/ops-lab1-4/actions/runs/38844456518",
+      "elapsed_created_to_updated_s": 30
+    },
+    {
+      "id": 38844389381,
+      "name": "ci",
+      "run_number": 13,
+      "run_attempt": 1,
+      "head_branch": "test/conflict-invalid-weeks",
+      "head_sha": "6f331368993c559826a0ec15db592fe4034bb8c9",
+      "event": "pull_request",
+      "conclusion": "failure",
+      "created_at": "2026-10-16T03:12:56Z",
+      "updated_at": "2026-10-16T03:13:16Z",
+      "run_started_at": "2026-10-16T03:12:56Z",
+      "html_url": "https://github.com/Icecube2017/ops-lab1-4/actions/runs/38844389381",
+      "elapsed_created_to_updated_s": 20
+    },
+    {
+      "id": 38844375239,
+      "name": "ci",
+      "run_number": 12,
+      "run_attempt": 1,
+      "head_branch": "test/conflict-invalid-weeks",
+      "head_sha": "07eed8a75d60bbb3bb407f8248f2be03b03fdb2d",
+      "event": "pull_request",
+      "conclusion": "success",
+      "created_at": "2026-10-16T03:12:46Z",
+      "updated_at": "2026-10-16T03:13:18Z",
+      "run_started_at": "2026-10-16T03:12:46Z",
+      "html_url": "https://github.com/Icecube2017/ops-lab1-4/actions/runs/38844375239",
+      "elapsed_created_to_updated_s": 32
+    },
+    {
+      "id": 38843386529,
+      "name": "ci",
+      "run_number": 11,
+      "run_attempt": 1,
+      "head_branch": "test/conflict-invalid-weeks",
+      "head_sha": "f683f12752c1ae52c415becb38908e963a0b1dff",
+      "event": "pull_request",
+      "conclusion": "failure",
+      "created_at": "2026-10-16T03:01:10Z",
+      "updated_at": "2026-10-16T03:01:41Z",
+      "run_started_at": "2026-10-16T03:01:10Z",
+      "html_url": "https://github.com/Icecube2017/ops-lab1-4/actions/runs/38843386529",
+      "elapsed_created_to_updated_s": 31
+    },
+    {
+      "id": 38843194354,
+      "name": "ci",
+      "run_number": 10,
+      "run_attempt": 1,
+      "head_branch": "test/conflict-invalid-weeks",
+      "head_sha": "56dfb04c6431bf050b86a4c95e6eb17540896c31",
+      "event": "pull_request",
+      "conclusion": "success",
+      "created_at": "2026-10-16T02:58:58Z",
+      "updated_at": "2026-10-16T02:59:18Z",
+      "run_started_at": "2026-10-16T02:58:58Z",
+      "html_url": "https://github.com/Icecube2017/ops-lab1-4/actions/runs/38843194354",
+      "elapsed_created_to_updated_s": 20
+    },
+    {
+      "id": 38837827848,
+      "name": "ci",
+      "run_number": 9,
+      "run_attempt": 1,
+      "head_branch": "test/valid-odd-weeks",
+      "head_sha": "734541a9df8e126f2016d7defbfbdb356a24dd91",
+      "event": "pull_request",
+      "conclusion": "failure",
+      "created_at": "2026-10-16T01:56:42Z",
+      "updated_at": "2026-10-16T01:57:13Z",
+      "run_started_at": "2026-10-16T01:56:42Z",
+      "html_url": "https://github.com/Icecube2017/ops-lab1-4/actions/runs/38837827848",
+      "elapsed_created_to_updated_s": 31
+    },
+    {
+      "id": 38742666164,
+      "name": "ci",
+      "run_number": 8,
+      "run_attempt": 1,
+      "head_branch": "feat/lab1-data",
+      "head_sha": "671c5ef417e4f3dc614ce2f6ad36aa072ef403d3",
+      "event": "pull_request",
+      "conclusion": "success",
+      "created_at": "2026-10-15T13:26:10Z",
+      "updated_at": "2026-10-15T13:26:41Z",
+      "run_started_at": "2026-10-15T13:26:10Z",
+      "html_url": "https://github.com/Icecube2017/ops-lab1-4/actions/runs/38742666164",
+      "elapsed_created_to_updated_s": 31
+    },
+    {
+      "id": 38735583504,
+      "name": "ci",
+      "run_number": 7,
+      "run_attempt": 1,
+      "head_branch": "main",
+      "head_sha": "fe8bc546fe879a37f873985a864b631c02247394",
+      "event": "push",
+      "conclusion": "success",
+      "created_at": "2026-10-15T12:33:43Z",
+      "updated_at": "2026-10-15T12:34:17Z",
+      "run_started_at": "2026-10-15T12:33:43Z",
+      "html_url": "https://github.com/Icecube2017/ops-lab1-4/actions/runs/38735583504",
+      "elapsed_created_to_updated_s": 34
+    },
+    {
+      "id": 38721221556,
+      "name": "ci",
+      "run_number": 6,
+      "run_attempt": 1,
+      "head_branch": "feat/add-conflict-test",
+      "head_sha": "e918261c40630d70c3dff2062e947fd36b60e8b4",
+      "event": "pull_request",
+      "conclusion": "success",
+      "created_at": "2026-10-15T10:34:23Z",
+      "updated_at": "2026-10-15T10:34:54Z",
+      "run_started_at": "2026-10-15T10:34:23Z",
+      "html_url": "https://github.com/Icecube2017/ops-lab1-4/actions/runs/38721221556",
+      "elapsed_created_to_updated_s": 31
+    },
+    {
+      "id": 38717249517,
+      "name": "ci",
+      "run_number": 5,
+      "run_attempt": 1,
+      "head_branch": "feat/add-conflict-test",
+      "head_sha": "3de8f12823499ad7ba886313c6863ead75a84ce7",
+      "event": "pull_request",
+      "conclusion": "failure",
+      "created_at": "2026-10-15T10:01:21Z",
+      "updated_at": "2026-10-15T10:01:51Z",
+      "run_started_at": "2026-10-15T10:01:21Z",
+      "html_url": "https://github.com/Icecube2017/ops-lab1-4/actions/runs/38717249517",
+      "elapsed_created_to_updated_s": 30
+    },
+    {
+      "id": 38717014937,
+      "name": "ci",
+      "run_number": 4,
+      "run_attempt": 1,
+      "head_branch": "feat/add-conflict-test",
+      "head_sha": "3de8f12823499ad7ba886313c6863ead75a84ce7",
+      "event": "pull_request",
+      "conclusion": "failure",
+      "created_at": "2026-10-15T09:59:32Z",
+      "updated_at": "2026-10-15T10:00:01Z",
+      "run_started_at": "2026-10-15T09:59:32Z",
+      "html_url": "https://github.com/Icecube2017/ops-lab1-4/actions/runs/38717014937",
+      "elapsed_created_to_updated_s": 29
+    },
+    {
+      "id": 38599499246,
+      "name": "ci",
+      "run_number": 3,
+      "run_attempt": 1,
+      "head_branch": "main",
+      "head_sha": "8ef969d4b6e2b0fe305329e250d7f685b2cde2c1",
+      "event": "push",
+      "conclusion": "success",
+      "created_at": "2026-10-14T16:36:21Z",
+      "updated_at": "2026-10-14T16:36:56Z",
+      "run_started_at": "2026-10-14T16:36:21Z",
+      "html_url": "https://github.com/Icecube2017/ops-lab1-4/actions/runs/38599499246",
+      "elapsed_created_to_updated_s": 35
+    },
+    {
+      "id": 38598869570,
+      "name": "ci",
+      "run_number": 2,
+      "run_attempt": 1,
+      "head_branch": "main",
+      "head_sha": "1d98509d9b43d069299b589a40924dad9678a95a",
+      "event": "push",
+      "conclusion": "success",
+      "created_at": "2026-10-14T16:31:55Z",
+      "updated_at": "2026-10-14T16:32:42Z",
+      "run_started_at": "2026-10-14T16:31:55Z",
+      "html_url": "https://github.com/Icecube2017/ops-lab1-4/actions/runs/38598869570",
+      "elapsed_created_to_updated_s": 47
+    },
+    {
+      "id": 38597424522,
+      "name": "ci",
+      "run_number": 1,
+      "run_attempt": 1,
+      "head_branch": "main",
+      "head_sha": "8ef969d4b6e2b0fe305329e250d7f685b2cde2c1",
+      "event": "push",
+      "conclusion": "success",
+      "created_at": "2026-10-14T16:21:44Z",
+      "updated_at": "2026-10-14T16:22:29Z",
+      "run_started_at": "2026-10-14T16:21:44Z",
+      "html_url": "https://github.com/Icecube2017/ops-lab1-4/actions/runs/38597424522",
+      "elapsed_created_to_updated_s": 45
+    }
+  ],
+  "release_v1_0_0": {
+    "id": 418178682,
+    "tag_name": "v1.0.0",
+    "target_commitish": "main",
+    "name": "v1.0.0",
+    "draft": false,
+    "immutable": false,
+    "created_at": "2026-10-20T08:44:49Z",
+    "published_at": "2026-10-20T08:45:41Z",
+    "html_url": "https://github.com/Icecube2017/ops-lab1-4/releases/tag/v1.0.0",
+    "assets": [
+      {
+        "name": "enroll-conflict_1.0.0_linux_amd64.tar.gz",
+        "size": 4856216,
+        "digest": "sha256:0d873c5b3c6de56d0de987a81c5760e92840b8bdc7f38d45ef15d6d0ef1cb33b",
+        "browser_download_url": "https://github.com/Icecube2017/ops-lab1-4/releases/download/v1.0.0/enroll-conflict_1.0.0_linux_amd64.tar.gz"
+      },
+      {
+        "name": "enroll-conflict_1.0.0_linux_amd64.tar.gz.sha256",
+        "size": 107,
+        "digest": "sha256:15437e96999bbd83d059af475220394627fa566b2d49867b4eda60a24811f9e1",
+        "browser_download_url": "https://github.com/Icecube2017/ops-lab1-4/releases/download/v1.0.0/enroll-conflict_1.0.0_linux_amd64.tar.gz.sha256"
+      }
+    ]
+  },
+  "protected_main_public_flag": true,
+  "protection_detail_unavailable": "Public branches list protected=true, but /branches/main/protection returned 401; exact ruleset approval count/bypass not verified.",
+  "release_gate": {
+    "run_id": 39397895544,
+    "tag": "v0.0.1",
+    "sha": "b3f193475ca320b3d4063b718b9aa71df4d1087c",
+    "duration_s": 9,
+    "annotation": "Release rejected: commit is not in main history",
+    "source": "https://github.com/Icecube2017/ops-lab1-4/actions/runs/39397895544"
+  },
+  "second_round": {
+    "pr": 4,
+    "defect": {
+      "sha": "56dfb04c6431bf050b86a4c95e6eb17540896c31",
+      "run_id": 38843194354,
+      "conclusion": "success"
+    },
+    "test": {
+      "sha": "6f331368993c559826a0ec15db592fe4034bb8c9",
+      "run_id": 38844389381,
+      "conclusion": "failure"
+    },
+    "revert": {
+      "sha": "07eed8a75d60bbb3bb407f8248f2be03b03fdb2d",
+      "run_id": 38844456518,
+      "conclusion": "success"
+    },
+    "description": "Valid accepted missing weeks (empty string) but old tests did not construct missing weeks; TestRejectsSectionWithoutWeeks closes this gap. PR3 failed and was closed unmerged, so it is not the passing-defect evidence."
+  },
+  "first_round_timing_note": {
+    "first_failure_end": "2026-10-15T10:00:01Z",
+    "second_failure_end": "2026-10-15T10:01:51Z",
+    "fix_commit_date": "2026-10-15T10:07:41Z",
+    "fix_ci_start": "2026-10-15T10:34:23Z",
+    "fix_ci_end": "2026-10-15T10:34:54Z",
+    "previous_push_time_claim_unverified": "2026-10-15T10:34:19Z",
+    "first_failure_end_to_green_s": 2093,
+    "later_ci_duration_s": 61,
+    "unattributed_processing_waiting_interval_s": 2032
+  },
+  "ci_summary_page_durations_s": {
+    "38717014937": 29,
+    "38717249517": 30,
+    "38721221556": 31,
+    "38735583504": 34,
+    "38843194354": 20,
+    "38844389381": 20,
+    "38844456518": 30
+  },
+  "build_number_collision": {
+    "release": {
+      "run_number": 1,
+      "run_id": 39395666401
+    },
+    "ci": {
+      "run_number": 1,
+      "run_id": 38597424522
+    }
+  },
+  "official_documentation": [
+    {
+      "title": "Events that trigger workflows",
+      "url": "https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#pull_request",
+      "fact": "Default pull_request checkout uses refs/pull/NUMBER/merge and GITHUB_SHA is the temporary merge commit; head.sha is branch head."
+    },
+    {
+      "title": "Variables reference",
+      "url": "https://docs.github.com/en/actions/reference/workflows-and-actions/variables",
+      "fact": "run_number is per-workflow and unchanged by re-run; run_id is unique within repository and unchanged by re-run; run_attempt increments."
+    },
+    {
+      "title": "Immutable releases",
+      "url": "https://docs.github.com/en/code-security/concepts/supply-chain-security/immutable-releases",
+      "fact": "Published immutable release assets and tag are locked; creates release attestation containing tag, commit SHA and assets."
+    },
+    {
+      "title": "Preventing changes to your releases",
+      "url": "https://docs.github.com/en/code-security/how-tos/secure-your-supply-chain/establish-provenance-and-integrity/prevent-release-changes",
+      "fact": "Enable release immutability in repository Settings > General > Releases; applies to future releases."
+    }
+  ],
+  "not_observed": [
+    "Exact historical PR github.sha from Show run context (anonymous logs require sign-in); API head_sha is not that field.",
+    "Exact active ruleset and bypass settings.",
+    "Original direct-push rejection terminal output.",
+    "Exact first-round fix push timestamp."
+  ],
+  "cleanup_pending_at_collection": [
+    "Public branch scratch/gate-test-graham exists.",
+    "Tag v0.0.1 exists."
+  ],
+  "evidence_only": "Read-only public observation; no external mutation performed."
+}

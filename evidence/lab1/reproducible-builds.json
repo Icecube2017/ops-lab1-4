@@ -1,0 +1,169 @@
+{
+  "recorded_at": "2026-10-20T10:08:29.355915+00:00",
+  "repository": "/private/tmp/lab1-repro",
+  "commit": "bc4b49ed0ea5becd29c643476e65b0b5834fb724",
+  "go_version": "go version go1.26.9 darwin/arm64",
+  "tar_version": "tar (GNU tar) 1.35",
+  "initial_status": "",
+  "environment": {
+    "GOCACHE": "/private/tmp/lab1-repro-go-cache",
+    "GOPATH": "/private/tmp/lab1-repro-go-path",
+    "GOTOOLCHAIN": "local",
+    "CGO_ENABLED": "0",
+    "GOOS": "linux",
+    "GOARCH": "amd64"
+  },
+  "runs": [
+    {
+      "label": "1",
+      "started_at": "2026-10-20T10:08:29.426231+00:00",
+      "finished_at": "2026-10-20T10:08:36.444403+00:00",
+      "command": [
+        "make",
+        "package",
+        "VERSION=1.0.0",
+        "BUILD_NO=7",
+        "RUN_ID=123",
+        "COMMIT=bc4b49ed0ea5becd29c643476e65b0b5834fb724",
+        "GOOS=linux",
+        "GOARCH=amd64"
+      ],
+      "build_no": 7,
+      "fixed_mtime": true,
+      "git_status": "",
+      "binary_sha256": "0e1bf62594e68fbf0a1435796da09404ea0be9e2c95d0eded065912ee631a955",
+      "archive_sha256": "cf5198fa52ecfad392be677b9875d64197d5e129308d72bb8d35a9b24fccde71",
+      "build_info": "name=enroll-conflict\nversion=1.0.0\nbuild_no=7\nrun_id=123\ncommit=bc4b49ed0ea5becd29c643476e65b0b5834fb724\ngo=go1.26.9\n",
+      "go_version_m": "/private/tmp/lab1-repro/dist/enroll-conflict_1.0.0_linux_amd64/enroll-conflict: go1.26.9\n\tpath\tenroll-conflict\n\tmod\tenroll-conflict\tv1.0.0\t\n\tbuild\t-buildmode=exe\n\tbuild\t-compiler=gc\n\tbuild\t-trimpath=true\n\tbuild\tCGO_ENABLED=0\n\tbuild\tGOARCH=amd64\n\tbuild\tGOOS=linux\n\tbuild\tGOAMD64=v1\n\tbuild\tvcs=git\n\tbuild\tvcs.revision=bc4b49ed0ea5becd29c643476e65b0b5834fb724\n\tbuild\tvcs.time=2026-10-20T08:38:28Z\n\tbuild\tvcs.modified=false\n",
+      "vcs_lines": [
+        "build\tvcs=git",
+        "build\tvcs.revision=bc4b49ed0ea5becd29c643476e65b0b5834fb724",
+        "build\tvcs.time=2026-10-20T08:38:28Z",
+        "build\tvcs.modified=false"
+      ],
+      "checksum_verification": "enroll-conflict_1.0.0_linux_amd64.tar.gz: OK\n",
+      "archive_listing": "drwxr-xr-x 0/0               0 1970-01-01 08:00 enroll-conflict_1.0.0_linux_amd64/\n-rw-r--r-- 0/0             117 1970-01-01 08:00 enroll-conflict_1.0.0_linux_amd64/BUILD_INFO\n-rwxr-xr-x 0/0         8813809 1970-01-01 08:00 enroll-conflict_1.0.0_linux_amd64/enroll-conflict\n"
+    },
+    {
+      "label": "2",
+      "started_at": "2026-10-20T10:08:36.473719+00:00",
+      "finished_at": "2026-10-20T10:08:37.151897+00:00",
+      "command": [
+        "make",
+        "package",
+        "VERSION=1.0.0",
+        "BUILD_NO=7",
+        "RUN_ID=123",
+        "COMMIT=bc4b49ed0ea5becd29c643476e65b0b5834fb724",
+        "GOOS=linux",
+        "GOARCH=amd64"
+      ],
+      "build_no": 7,
+      "fixed_mtime": true,
+      "git_status": "",
+      "binary_sha256": "0e1bf62594e68fbf0a1435796da09404ea0be9e2c95d0eded065912ee631a955",
+      "archive_sha256": "cf5198fa52ecfad392be677b9875d64197d5e129308d72bb8d35a9b24fccde71",
+      "build_info": "name=enroll-conflict\nversion=1.0.0\nbuild_no=7\nrun_id=123\ncommit=bc4b49ed0ea5becd29c643476e65b0b5834fb724\ngo=go1.26.9\n",
+      "go_version_m": "/private/tmp/lab1-repro/dist/enroll-conflict_1.0.0_linux_amd64/enroll-conflict: go1.26.9\n\tpath\tenroll-conflict\n\tmod\tenroll-conflict\tv1.0.0\t\n\tbuild\t-buildmode=exe\n\tbuild\t-compiler=gc\n\tbuild\t-trimpath=true\n\tbuild\tCGO_ENABLED=0\n\tbuild\tGOARCH=amd64\n\tbuild\tGOOS=linux\n\tbuild\tGOAMD64=v1\n\tbuild\tvcs=git\n\tbuild\tvcs.revision=bc4b49ed0ea5becd29c643476e65b0b5834fb724\n\tbuild\tvcs.time=2026-10-20T08:38:28Z\n\tbuild\tvcs.modified=false\n",
+      "vcs_lines": [
+        "build\tvcs=git",
+        "build\tvcs.revision=bc4b49ed0ea5becd29c643476e65b0b5834fb724",
+        "build\tvcs.time=2026-10-20T08:38:28Z",
+        "build\tvcs.modified=false"
+      ],
+      "checksum_verification": "enroll-conflict_1.0.0_linux_amd64.tar.gz: OK\n",
+      "archive_listing": "drwxr-xr-x 0/0               0 1970-01-01 08:00 enroll-conflict_1.0.0_linux_amd64/\n-rw-r--r-- 0/0             117 1970-01-01 08:00 enroll-conflict_1.0.0_linux_amd64/BUILD_INFO\n-rwxr-xr-x 0/0         8813809 1970-01-01 08:00 enroll-conflict_1.0.0_linux_amd64/enroll-conflict\n"
+    },
+    {
+      "label": "3",
+      "started_at": "2026-10-20T10:08:37.178911+00:00",
+      "finished_at": "2026-10-20T10:08:38.019372+00:00",
+      "command": [
+        "make",
+        "package",
+        "VERSION=1.0.0",
+        "BUILD_NO=8",
+        "RUN_ID=123",
+        "COMMIT=bc4b49ed0ea5becd29c643476e65b0b5834fb724",
+        "GOOS=linux",
+        "GOARCH=amd64"
+      ],
+      "build_no": 8,
+      "fixed_mtime": true,
+      "git_status": "",
+      "binary_sha256": "73be078d7444d2548e6e907ed041de22b54c77d97dee9408193353f71f4e05d0",
+      "archive_sha256": "b85f978029c0577ed58106bdd3115a5ac5ebbc8cbe2500b0e02303a0be04da08",
+      "build_info": "name=enroll-conflict\nversion=1.0.0\nbuild_no=8\nrun_id=123\ncommit=bc4b49ed0ea5becd29c643476e65b0b5834fb724\ngo=go1.26.9\n",
+      "go_version_m": "/private/tmp/lab1-repro/dist/enroll-conflict_1.0.0_linux_amd64/enroll-conflict: go1.26.9\n\tpath\tenroll-conflict\n\tmod\tenroll-conflict\tv1.0.0\t\n\tbuild\t-buildmode=exe\n\tbuild\t-compiler=gc\n\tbuild\t-trimpath=true\n\tbuild\tCGO_ENABLED=0\n\tbuild\tGOARCH=amd64\n\tbuild\tGOOS=linux\n\tbuild\tGOAMD64=v1\n\tbuild\tvcs=git\n\tbuild\tvcs.revision=bc4b49ed0ea5becd29c643476e65b0b5834fb724\n\tbuild\tvcs.time=2026-10-20T08:38:28Z\n\tbuild\tvcs.modified=false\n",
+      "vcs_lines": [
+        "build\tvcs=git",
+        "build\tvcs.revision=bc4b49ed0ea5becd29c643476e65b0b5834fb724",
+        "build\tvcs.time=2026-10-20T08:38:28Z",
+        "build\tvcs.modified=false"
+      ],
+      "checksum_verification": "enroll-conflict_1.0.0_linux_amd64.tar.gz: OK\n",
+      "archive_listing": "drwxr-xr-x 0/0               0 1970-01-01 08:00 enroll-conflict_1.0.0_linux_amd64/\n-rw-r--r-- 0/0             117 1970-01-01 08:00 enroll-conflict_1.0.0_linux_amd64/BUILD_INFO\n-rwxr-xr-x 0/0         8813809 1970-01-01 08:00 enroll-conflict_1.0.0_linux_amd64/enroll-conflict\n"
+    },
+    {
+      "label": "4",
+      "started_at": "2026-10-20T10:08:38.047936+00:00",
+      "finished_at": "2026-10-20T10:08:38.961187+00:00",
+      "command": [
+        "make",
+        "package",
+        "VERSION=1.0.0",
+        "BUILD_NO=7",
+        "RUN_ID=123",
+        "COMMIT=bc4b49ed0ea5becd29c643476e65b0b5834fb724",
+        "GOOS=linux",
+        "GOARCH=amd64"
+      ],
+      "build_no": 7,
+      "fixed_mtime": false,
+      "git_status": " M Makefile\n",
+      "binary_sha256": "50d95ba729e594dc5eba409b6c36dabf935047259af5f62df6d23751aa5eeb2b",
+      "archive_sha256": "f254e8ac45257a720a4f9e1b85e8fd360cfe2b9877315056f2092034fbfb19e6",
+      "build_info": "name=enroll-conflict\nversion=1.0.0\nbuild_no=7\nrun_id=123\ncommit=bc4b49ed0ea5becd29c643476e65b0b5834fb724\ngo=go1.26.9\n",
+      "go_version_m": "/private/tmp/lab1-repro/dist/enroll-conflict_1.0.0_linux_amd64/enroll-conflict: go1.26.9\n\tpath\tenroll-conflict\n\tmod\tenroll-conflict\tv1.0.0+dirty\t\n\tbuild\t-buildmode=exe\n\tbuild\t-compiler=gc\n\tbuild\t-trimpath=true\n\tbuild\tCGO_ENABLED=0\n\tbuild\tGOARCH=amd64\n\tbuild\tGOOS=linux\n\tbuild\tGOAMD64=v1\n\tbuild\tvcs=git\n\tbuild\tvcs.revision=bc4b49ed0ea5becd29c643476e65b0b5834fb724\n\tbuild\tvcs.time=2026-10-20T08:38:28Z\n\tbuild\tvcs.modified=true\n",
+      "vcs_lines": [
+        "build\tvcs=git",
+        "build\tvcs.revision=bc4b49ed0ea5becd29c643476e65b0b5834fb724",
+        "build\tvcs.time=2026-10-20T08:38:28Z",
+        "build\tvcs.modified=true"
+      ],
+      "checksum_verification": "enroll-conflict_1.0.0_linux_amd64.tar.gz: OK\n",
+      "archive_listing": "drwxr-xr-x 0/0               0 2026-10-20 18:08 enroll-conflict_1.0.0_linux_amd64/\n-rw-r--r-- 0/0             117 2026-10-20 18:08 enroll-conflict_1.0.0_linux_amd64/BUILD_INFO\n-rwxr-xr-x 0/0         8813809 2026-10-20 18:08 enroll-conflict_1.0.0_linux_amd64/enroll-conflict\n"
+    },
+    {
+      "label": "5",
+      "started_at": "2026-10-20T10:08:42.002086+00:00",
+      "finished_at": "2026-10-20T10:08:42.848857+00:00",
+      "command": [
+        "make",
+        "package",
+        "VERSION=1.0.0",
+        "BUILD_NO=7",
+        "RUN_ID=123",
+        "COMMIT=bc4b49ed0ea5becd29c643476e65b0b5834fb724",
+        "GOOS=linux",
+        "GOARCH=amd64"
+      ],
+      "build_no": 7,
+      "fixed_mtime": false,
+      "git_status": " M Makefile\n",
+      "binary_sha256": "50d95ba729e594dc5eba409b6c36dabf935047259af5f62df6d23751aa5eeb2b",
+      "archive_sha256": "5ccf9e4517a31467e8bc05a19c13355a43d77320d8fc50fdee73068367f63f46",
+      "build_info": "name=enroll-conflict\nversion=1.0.0\nbuild_no=7\nrun_id=123\ncommit=bc4b49ed0ea5becd29c643476e65b0b5834fb724\ngo=go1.26.9\n",
+      "go_version_m": "/private/tmp/lab1-repro/dist/enroll-conflict_1.0.0_linux_amd64/enroll-conflict: go1.26.9\n\tpath\tenroll-conflict\n\tmod\tenroll-conflict\tv1.0.0+dirty\t\n\tbuild\t-buildmode=exe\n\tbuild\t-compiler=gc\n\tbuild\t-trimpath=true\n\tbuild\tCGO_ENABLED=0\n\tbuild\tGOARCH=amd64\n\tbuild\tGOOS=linux\n\tbuild\tGOAMD64=v1\n\tbuild\tvcs=git\n\tbuild\tvcs.revision=bc4b49ed0ea5becd29c643476e65b0b5834fb724\n\tbuild\tvcs.time=2026-10-20T08:38:28Z\n\tbuild\tvcs.modified=true\n",
+      "vcs_lines": [
+        "build\tvcs=git",
+        "build\tvcs.revision=bc4b49ed0ea5becd29c643476e65b0b5834fb724",
+        "build\tvcs.time=2026-10-20T08:38:28Z",
+        "build\tvcs.modified=true"
+      ],
+      "checksum_verification": "enroll-conflict_1.0.0_linux_amd64.tar.gz: OK\n",
+      "archive_listing": "drwxr-xr-x 0/0               0 2026-10-20 18:08 enroll-conflict_1.0.0_linux_amd64/\n-rw-r--r-- 0/0             117 2026-10-20 18:08 enroll-conflict_1.0.0_linux_amd64/BUILD_INFO\n-rwxr-xr-x 0/0         8813809 2026-10-20 18:08 enroll-conflict_1.0.0_linux_amd64/enroll-conflict\n"
+    }
+  ],
+  "final_status": ""
+}
