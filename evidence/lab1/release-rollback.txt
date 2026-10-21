@@ -1,0 +1,337 @@
++ date -u +%Y-%m-%dT%H:%M:%SZ
+2026-10-21T02:37:56Z
++ uname -a
+Linux lima-lab1-runtime 6.18.22-0-virt #1-Alpine SMP PREEMPT_DYNAMIC 2026-04-11 15:53:25 aarch64 GNU/Linux
++ cat /etc/os-release
+NAME="Alpine Linux"
+ID=alpine
+VERSION_ID=3.23.4
+PRETTY_NAME="Alpine Linux v3.23"
+HOME_URL="https://alpinelinux.org/"
+BUG_REPORT_URL="https://gitlab.alpinelinux.org/alpine/aports/-/issues"
++ /usr/bin/qemu-x86_64 --version
+qemu-x86_64 version 10.1.5
+Copyright (c) 2003-2025 Fabrice Bellard and the QEMU Project developers
++ tar + head --version
+-n 1
+tar (GNU tar) 1.35
++ git --version
+git version 2.52.0
++ cd /mnt/lab1/rollback-repo
++ git status --short
++ git rev-parse HEAD origin/main 'v1.0.0^{commit}' 'v1.0.1^{commit}'
+30e1b29012711519c19192c399954088668507da
+30e1b29012711519c19192c399954088668507da
+bc4b49ed0ea5becd29c643476e65b0b5834fb724
+30e1b29012711519c19192c399954088668507da
++ sha256sum scripts/verify-release-rollback.sh scripts/trace.sh
+6460b52caa143282cf3609d493355bb427cb44f121e8fb7a0cc0c4cb6ec5d1ee  scripts/verify-release-rollback.sh
+4003cbf9177543ae2429ca62b539ccdc298197a67a7322cfdf36567569b62f65  scripts/trace.sh
++ set +e
++ QEMU_X86_64=/usr/bin/qemu-x86_64
++ PORT=18080
++ bash -x scripts/verify-release-rollback.sh
++ set -euo pipefail
++++ dirname scripts/verify-release-rollback.sh
+++ cd scripts/..
+++ pwd
++ repo=/mnt/lab1/rollback-repo
++ out=/mnt/lab1/rollback-repo/dist/release
++ repo_url=https://github.com/Icecube2017/ops-lab1-4
++ port=18080
++ pid=
++ trap stop EXIT
++ trap 'exit 130' INT
++ trap 'exit 143' TERM
+++ uname -s
++ [[ Linux == Linux ]]
++ [[ 18080 =~ ^[0-9]{1,5}$ ]]
++ port=18080
++ (( port >= 1 && port <= 65535 ))
++ runner=()
++ [[ -n /usr/bin/qemu-x86_64 ]]
++ [[ /usr/bin/qemu-x86_64 == /* ]]
++ [[ -x /usr/bin/qemu-x86_64 ]]
++ runner=("$QEMU_X86_64")
++ for tool in curl tar sha256sum git
++ command -v curl
++ for tool in curl tar sha256sum git
++ command -v tar
++ for tool in curl tar sha256sum git
++ command -v sha256sum
++ for tool in curl tar sha256sum git
++ command -v git
+++ tar --version
++ [[ tar (GNU tar) 1.35
+Copyright (C) 2023 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <https://gnu.org/licenses/gpl.html>.
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+
+Written by John Gilmore and Jay Fenlason. == *GNU tar* ]]
++ baseline=/mnt/lab1/rollback-repo/evidence/lab1/v1.0.0.sha256
++ [[ -f /mnt/lab1/rollback-repo/evidence/lab1/v1.0.0.sha256 ]]
++ read -r pinned _
++ [[ 0d873c5b3c6de56d0de987a81c5760e92840b8bdc7f38d45ef15d6d0ef1cb33b =~ ^[[:xdigit:]]{64}$ ]]
++ git -C /mnt/lab1/rollback-repo rev-parse --verify origin/main
++ mkdir -p /mnt/lab1/rollback-repo/dist/release
++ for v in 1.0.0 1.0.1
++ name=enroll-conflict_1.0.0_linux_amd64.tar.gz
++ for suffix in '' .sha256
++ curl -fL --retry 2 --connect-timeout 15 --max-time 180 -o /mnt/lab1/rollback-repo/dist/release/enroll-conflict_1.0.0_linux_amd64.tar.gz https://github.com/Icecube2017/ops-lab1-4/releases/download/v1.0.0/enroll-conflict_1.0.0_linux_amd64.tar.gz
+  % Total    % Received % Xferd  Average Speed  Time    Time    Time   Current
+                                 Dload  Upload  Total   Spent   Left   Speed
+  0      0   0      0   0      0      0      0                              0  0      0   0      0   0      0      0      0                              0  0      0   0      0   0      0      0      0                              0
+  0      0   0      0   0      0      0      0                              0 84  4.63M  84  3.90M   0      0  2.49M      0   00:01   00:01          3.90M100  4.63M 100  4.63M   0      0  2.28M      0   00:02   00:02          3.90M100  4.63M 100  4.63M   0      0  2.26M      0   00:02   00:02          3.90M100  4.63M 100  4.63M   0      0  2.24M      0   00:02   00:02          3.90M
++ for suffix in '' .sha256
++ curl -fL --retry 2 --connect-timeout 15 --max-time 180 -o /mnt/lab1/rollback-repo/dist/release/enroll-conflict_1.0.0_linux_amd64.tar.gz.sha256 https://github.com/Icecube2017/ops-lab1-4/releases/download/v1.0.0/enroll-conflict_1.0.0_linux_amd64.tar.gz.sha256
+  % Total    % Received % Xferd  Average Speed  Time    Time    Time   Current
+                                 Dload  Upload  Total   Spent   Left   Speed
+  0      0   0      0   0      0      0      0                              0  0      0   0      0   0      0      0      0                              0  0      0   0      0   0      0      0      0                              0
+  0      0   0      0   0      0      0      0                              0100    107 100    107   0      0    128      0                              0100    107 100    107   0      0    126      0                              0100    107 100    107   0      0    124      0                              0
++ for v in 1.0.0 1.0.1
++ name=enroll-conflict_1.0.1_linux_amd64.tar.gz
++ for suffix in '' .sha256
++ curl -fL --retry 2 --connect-timeout 15 --max-time 180 -o /mnt/lab1/rollback-repo/dist/release/enroll-conflict_1.0.1_linux_amd64.tar.gz https://github.com/Icecube2017/ops-lab1-4/releases/download/v1.0.1/enroll-conflict_1.0.1_linux_amd64.tar.gz
+  % Total    % Received % Xferd  Average Speed  Time    Time    Time   Current
+                                 Dload  Upload  Total   Spent   Left   Speed
+  0      0   0      0   0      0      0      0                              0  0      0   0      0   0      0      0      0                              0  0      0   0      0   0      0      0      0                              0
+  0      0   0      0   0      0      0      0                              0100  4.63M 100  4.63M   0      0  3.15M      0   00:01   00:01              0100  4.63M 100  4.63M   0      0  3.12M      0   00:01   00:01              0100  4.63M 100  4.63M   0      0  3.09M      0   00:01   00:01              0
++ for suffix in '' .sha256
++ curl -fL --retry 2 --connect-timeout 15 --max-time 180 -o /mnt/lab1/rollback-repo/dist/release/enroll-conflict_1.0.1_linux_amd64.tar.gz.sha256 https://github.com/Icecube2017/ops-lab1-4/releases/download/v1.0.1/enroll-conflict_1.0.1_linux_amd64.tar.gz.sha256
+  % Total    % Received % Xferd  Average Speed  Time    Time    Time   Current
+                                 Dload  Upload  Total   Spent   Left   Speed
+  0      0   0      0   0      0      0      0                              0  0      0   0      0   0      0      0      0                              0  0      0   0      0   0      0      0      0                              0
+  0      0   0      0   0      0      0      0                              0100    107 100    107   0      0    192      0                              0100    107 100    107   0      0    188      0                              0100    107 100    107   0      0    184      0                              0
++ tee /mnt/lab1/rollback-repo/dist/release/archive-sha256.txt+ sha256sum 
+/mnt/lab1/rollback-repo/dist/release/enroll-conflict_1.0.0_linux_amd64.tar.gz /mnt/lab1/rollback-repo/dist/release/enroll-conflict_1.0.1_linux_amd64.tar.gz
+0d873c5b3c6de56d0de987a81c5760e92840b8bdc7f38d45ef15d6d0ef1cb33b  /mnt/lab1/rollback-repo/dist/release/enroll-conflict_1.0.0_linux_amd64.tar.gz
+4e86d5f92aacf9c8aa3062b03fc99a11119475797f4bfa647c10a4acc5b62c71  /mnt/lab1/rollback-repo/dist/release/enroll-conflict_1.0.1_linux_amd64.tar.gz
+++ sha256sum /mnt/lab1/rollback-repo/dist/release/enroll-conflict_1.0.0_linux_amd64.tar.gz
++ actual='0d873c5b3c6de56d0de987a81c5760e92840b8bdc7f38d45ef15d6d0ef1cb33b  /mnt/lab1/rollback-repo/dist/release/enroll-conflict_1.0.0_linux_amd64.tar.gz'
++ [[ 0d873c5b3c6de56d0de987a81c5760e92840b8bdc7f38d45ef15d6d0ef1cb33b == 0d873c5b3c6de56d0de987a81c5760e92840b8bdc7f38d45ef15d6d0ef1cb33b ]]
++ printf + tee 'v1.0.0 独立基线校验通过：%s\n' 0d873c5b3c6de56d0de987a81c5760e92840b8bdc7f38d45ef15d6d0ef1cb33b/mnt/lab1/rollback-repo/dist/release/baseline-check.txt
+
+v1.0.0 独立基线校验通过：0d873c5b3c6de56d0de987a81c5760e92840b8bdc7f38d45ef15d6d0ef1cb33b
++ for v in 1.0.0 1.0.1
++ archive=/mnt/lab1/rollback-repo/dist/release/enroll-conflict_1.0.0_linux_amd64.tar.gz
++ bash /mnt/lab1/rollback-repo/scripts/trace.sh + tee /mnt/lab1/rollback-repo/dist/release/enroll-conflict_1.0.0_linux_amd64.tar.gz /mnt/lab1/rollback-repo /mnt/lab1/rollback-repo/dist/release/trace-v1.0.0.txt
+origin/main
+== 1. 校验和
+enroll-conflict_1.0.0_linux_amd64.tar.gz: OK
+== 2. 制品里的 BUILD_INFO
+name=enroll-conflict
+version=1.0.0
+build_no=1
+run_id=39395666401
+commit=bc4b49ed0ea5becd29c643476e65b0b5834fb724
+go=go1.26.9
+== 3. 提交 bc4b49ed0ea5becd29c643476e65b0b5834fb724
+作者: Graham <ningxi1019@gmail.com>
+时间: 2026-10-20T16:38:28+08:00
+标题: ci: add release workflow for lab1 (#5)
+主干: 该提交在 origin/main 的历史上
+指向它的 tag: v1.0.0
+版本号: 1.0.0    构建号: 1
+提交页面（含关联的 PR）: https://github.com/Icecube2017/ops-lab1-4/commit/bc4b49ed0ea5becd29c643476e65b0b5834fb724
+构建它的运行: https://github.com/Icecube2017/ops-lab1-4/actions/runs/39395666401
++ tee + echo -a /mnt/lab1/rollback-repo/dist/release/trace-v1.0.0.txttrace_exit_code=0
+
+trace_exit_code=0
++ tar -xzf /mnt/lab1/rollback-repo/dist/release/enroll-conflict_1.0.0_linux_amd64.tar.gz -C /mnt/lab1/rollback-repo/dist/release
++ for v in 1.0.0 1.0.1
++ archive=/mnt/lab1/rollback-repo/dist/release/enroll-conflict_1.0.1_linux_amd64.tar.gz
++ tee + bash /mnt/lab1/rollback-repo/dist/release/trace-v1.0.1.txt
+/mnt/lab1/rollback-repo/scripts/trace.sh /mnt/lab1/rollback-repo/dist/release/enroll-conflict_1.0.1_linux_amd64.tar.gz /mnt/lab1/rollback-repo origin/main
+== 1. 校验和
+enroll-conflict_1.0.1_linux_amd64.tar.gz: OK
+== 2. 制品里的 BUILD_INFO
+name=enroll-conflict
+version=1.0.1
+build_no=3
+run_id=39533349032
+commit=30e1b29012711519c19192c399954088668507da
+go=go1.26.9
+== 3. 提交 30e1b29012711519c19192c399954088668507da
+作者: Connor Anderson <beyond-the-reality@sjtu.edu.cn>
+时间: 2026-10-20T20:39:12+08:00
+标题: xcs-step6 fix: 禁止缓存版本信息并补充实验1记录 (#6)
+主干: 该提交在 origin/main 的历史上
+指向它的 tag: v1.0.1
+版本号: 1.0.1    构建号: 3
+提交页面（含关联的 PR）: https://github.com/Icecube2017/ops-lab1-4/commit/30e1b29012711519c19192c399954088668507da
+构建它的运行: https://github.com/Icecube2017/ops-lab1-4/actions/runs/39533349032
++ echo trace_exit_code=0+ tee 
+-a /mnt/lab1/rollback-repo/dist/release/trace-v1.0.1.txt
+trace_exit_code=0
++ tar -xzf /mnt/lab1/rollback-repo/dist/release/enroll-conflict_1.0.1_linux_amd64.tar.gz -C /mnt/lab1/rollback-repo/dist/release
++ url=http://127.0.0.1:18080/version
++ curl -sS --connect-timeout 1 --max-time 1 -o /dev/null http://127.0.0.1:18080/version
++ for v in 1.0.1 1.0.0
++ pkg=/mnt/lab1/rollback-repo/dist/release/enroll-conflict_1.0.1_linux_amd64
++ info=/mnt/lab1/rollback-repo/dist/release/enroll-conflict_1.0.1_linux_amd64/BUILD_INFO
+++ get version
+++ sed -n 's/^version=//p' /mnt/lab1/rollback-repo/dist/release/enroll-conflict_1.0.1_linux_amd64/BUILD_INFO
++ [[ 1.0.1 == 1\.0\.1 ]]
++++ get version
++++ sed -n 's/^version=//p' /mnt/lab1/rollback-repo/dist/release/enroll-conflict_1.0.1_linux_amd64/BUILD_INFO
++++ get commit
++++ sed -n 's/^commit=//p' /mnt/lab1/rollback-repo/dist/release/enroll-conflict_1.0.1_linux_amd64/BUILD_INFO
++++ get build_no
++++ sed -n 's/^build_no=//p' /mnt/lab1/rollback-repo/dist/release/enroll-conflict_1.0.1_linux_amd64/BUILD_INFO
++++ get go
++++ sed -n 's/^go=//p' /mnt/lab1/rollback-repo/dist/release/enroll-conflict_1.0.1_linux_amd64/BUILD_INFO
+++ printf '{"version":"%s","commit":"%s","build_no":"%s","go":"%s"}' 1.0.1 30e1b29012711519c19192c399954088668507da 3 go1.26.9
++ expected='{"version":"1.0.1","commit":"30e1b29012711519c19192c399954088668507da","build_no":"3","go":"go1.26.9"}'
++ pid=2722
++ /usr/bin/qemu-x86_64 + ready=false
+/mnt/lab1/rollback-repo/dist/release/enroll-conflict_1.0.1_linux_amd64/enroll-conflict + :-addr 127.0.0.1:18080
+
++ (( attempt = 0 ))
++ (( attempt < 50 ))
++ kill -0 2722
+++ curl -fsS --connect-timeout 1 --max-time 1 http://127.0.0.1:18080/version
++ response=
++ sleep 0.2
++ (( attempt++ ))
++ (( attempt < 50 ))
++ kill -0 2722
+++ curl -fsS --connect-timeout 1 --max-time 1 http://127.0.0.1:18080/version
++ response='{"version":"1.0.1","commit":"30e1b29012711519c19192c399954088668507da","build_no":"3","go":"go1.26.9"}'
++ ready=true
++ break
++ [[ true == true ]]
++ kill -0 2722
++ printf + tee '%s\n' '{"version":"1.0.1","commit":"30e1b29012711519c19192c399954088668507da","build_no":"3","go":"go1.26.9"}'/mnt/lab1/rollback-repo/dist/release/version-v1.0.1.json
+
+{"version":"1.0.1","commit":"30e1b29012711519c19192c399954088668507da","build_no":"3","go":"go1.26.9"}
++ [[ {"version":"1.0.1","commit":"30e1b29012711519c19192c399954088668507da","build_no":"3","go":"go1.26.9"} == {"version"\:"1\.0\.1","commit"\:"30e1b29012711519c19192c399954088668507da","build_no"\:"3","go"\:"go1\.26\.9"} ]]
++ stop
++ [[ -n 2722 ]]
++ kill 2722
++ wait 2722
++ true
++ pid=
++ for v in 1.0.1 1.0.0
++ pkg=/mnt/lab1/rollback-repo/dist/release/enroll-conflict_1.0.0_linux_amd64
++ info=/mnt/lab1/rollback-repo/dist/release/enroll-conflict_1.0.0_linux_amd64/BUILD_INFO
+++ get version
+++ sed -n 's/^version=//p' /mnt/lab1/rollback-repo/dist/release/enroll-conflict_1.0.0_linux_amd64/BUILD_INFO
++ [[ 1.0.0 == 1\.0\.0 ]]
++++ get version
++++ sed -n 's/^version=//p' /mnt/lab1/rollback-repo/dist/release/enroll-conflict_1.0.0_linux_amd64/BUILD_INFO
++++ get commit
++++ sed -n 's/^commit=//p' /mnt/lab1/rollback-repo/dist/release/enroll-conflict_1.0.0_linux_amd64/BUILD_INFO
++++ get build_no
++++ sed -n 's/^build_no=//p' /mnt/lab1/rollback-repo/dist/release/enroll-conflict_1.0.0_linux_amd64/BUILD_INFO
++++ get go
++++ sed -n 's/^go=//p' /mnt/lab1/rollback-repo/dist/release/enroll-conflict_1.0.0_linux_amd64/BUILD_INFO
+++ printf '{"version":"%s","commit":"%s","build_no":"%s","go":"%s"}' 1.0.0 bc4b49ed0ea5becd29c643476e65b0b5834fb724 1 go1.26.9
++ expected='{"version":"1.0.0","commit":"bc4b49ed0ea5becd29c643476e65b0b5834fb724","build_no":"1","go":"go1.26.9"}'
++ pid=2742
++ /usr/bin/qemu-x86_64 + ready=false
+/mnt/lab1/rollback-repo/dist/release/enroll-conflict_1.0.0_linux_amd64/enroll-conflict + :-addr 127.0.0.1:18080
+
++ (( attempt = 0 ))
++ (( attempt < 50 ))
++ kill -0 2742
+++ curl -fsS --connect-timeout 1 --max-time 1 http://127.0.0.1:18080/version
++ response=
++ sleep 0.2
++ (( attempt++ ))
++ (( attempt < 50 ))
++ kill -0 2742
+++ curl -fsS --connect-timeout 1 --max-time 1 http://127.0.0.1:18080/version
++ response='{"version":"1.0.0","commit":"bc4b49ed0ea5becd29c643476e65b0b5834fb724","build_no":"1","go":"go1.26.9"}'
++ ready=true
++ break
++ [[ true == true ]]
++ kill -0 2742
++ printf + tee '%s\n' '{"version":"1.0.0","commit":"bc4b49ed0ea5becd29c643476e65b0b5834fb724","build_no":"1","go":"go1.26.9"}'/mnt/lab1/rollback-repo/dist/release/version-v1.0.0.json
+
+{"version":"1.0.0","commit":"bc4b49ed0ea5becd29c643476e65b0b5834fb724","build_no":"1","go":"go1.26.9"}
++ [[ {"version":"1.0.0","commit":"bc4b49ed0ea5becd29c643476e65b0b5834fb724","build_no":"1","go":"go1.26.9"} == {"version"\:"1\.0\.0","commit"\:"bc4b49ed0ea5becd29c643476e65b0b5834fb724","build_no"\:"1","go"\:"go1\.26\.9"} ]]
++ stop
++ [[ -n 2742 ]]
++ kill 2742
++ wait 2742
++ true
++ pid=
++ echo 追溯、基线核验与回退全部通过。原始输出：/mnt/lab1/rollback-repo/dist/release
+追溯、基线核验与回退全部通过。原始输出：/mnt/lab1/rollback-repo/dist/release
++ stop
++ [[ -n '' ]]
++ verify_status=0
++ set -e
++ printf 'verify_release_rollback_exit_code=%s\n' 0
+verify_release_rollback_exit_code=0
++ printf 'SCRIPT_EXIT_CODE=%s\n' 0
+SCRIPT_EXIT_CODE=0
++ test 0 -eq 0
++ cat dist/release/archive-sha256.txt dist/release/baseline-check.txt
+0d873c5b3c6de56d0de987a81c5760e92840b8bdc7f38d45ef15d6d0ef1cb33b  /mnt/lab1/rollback-repo/dist/release/enroll-conflict_1.0.0_linux_amd64.tar.gz
+4e86d5f92aacf9c8aa3062b03fc99a11119475797f4bfa647c10a4acc5b62c71  /mnt/lab1/rollback-repo/dist/release/enroll-conflict_1.0.1_linux_amd64.tar.gz
+v1.0.0 独立基线校验通过：0d873c5b3c6de56d0de987a81c5760e92840b8bdc7f38d45ef15d6d0ef1cb33b
++ cat dist/release/trace-v1.0.0.txt dist/release/trace-v1.0.1.txt
+== 1. 校验和
+enroll-conflict_1.0.0_linux_amd64.tar.gz: OK
+== 2. 制品里的 BUILD_INFO
+name=enroll-conflict
+version=1.0.0
+build_no=1
+run_id=39395666401
+commit=bc4b49ed0ea5becd29c643476e65b0b5834fb724
+go=go1.26.9
+== 3. 提交 bc4b49ed0ea5becd29c643476e65b0b5834fb724
+作者: Graham <ningxi1019@gmail.com>
+时间: 2026-10-20T16:38:28+08:00
+标题: ci: add release workflow for lab1 (#5)
+主干: 该提交在 origin/main 的历史上
+指向它的 tag: v1.0.0
+版本号: 1.0.0    构建号: 1
+提交页面（含关联的 PR）: https://github.com/Icecube2017/ops-lab1-4/commit/bc4b49ed0ea5becd29c643476e65b0b5834fb724
+构建它的运行: https://github.com/Icecube2017/ops-lab1-4/actions/runs/39395666401
+trace_exit_code=0
+== 1. 校验和
+enroll-conflict_1.0.1_linux_amd64.tar.gz: OK
+== 2. 制品里的 BUILD_INFO
+name=enroll-conflict
+version=1.0.1
+build_no=3
+run_id=39533349032
+commit=30e1b29012711519c19192c399954088668507da
+go=go1.26.9
+== 3. 提交 30e1b29012711519c19192c399954088668507da
+作者: Connor Anderson <beyond-the-reality@sjtu.edu.cn>
+时间: 2026-10-20T20:39:12+08:00
+标题: xcs-step6 fix: 禁止缓存版本信息并补充实验1记录 (#6)
+主干: 该提交在 origin/main 的历史上
+指向它的 tag: v1.0.1
+版本号: 1.0.1    构建号: 3
+提交页面（含关联的 PR）: https://github.com/Icecube2017/ops-lab1-4/commit/30e1b29012711519c19192c399954088668507da
+构建它的运行: https://github.com/Icecube2017/ops-lab1-4/actions/runs/39533349032
+trace_exit_code=0
++ cat dist/release/version-v1.0.1.json dist/release/version-v1.0.0.json
+{"version":"1.0.1","commit":"30e1b29012711519c19192c399954088668507da","build_no":"3","go":"go1.26.9"}
+{"version":"1.0.0","commit":"bc4b49ed0ea5becd29c643476e65b0b5834fb724","build_no":"1","go":"go1.26.9"}
++ curl --silent --show-error --fail --max-time 2 http://127.0.0.1:18080/version
+curl: (7) Failed to connect to 127.0.0.1:18080 after 0 ms: Could not connect to server
++ awk '$2 ~ /:46A0$/ && $4 == "0A" { found = 1; print } END { exit found ? 1 : 0 }' /proc/net/tcp /proc/net/tcp6
++ printf '%s\n' final_port_18080_closed=true 'PASS: unchanged verification script completed with published original release attachments; both own service PIDs terminated and waited; final listener closed.'
+final_port_18080_closed=true
+PASS: unchanged verification script completed with published original release attachments; both own service PIDs terminated and waited; final listener closed.
++ date -u +%Y-%m-%dT%H:%M:%SZ
+2026-10-21T02:38:02Z
++zsh:1> date -u +%Y-%m-%dT%H:%M:%SZ
+2026-10-21T02:38:55Z
++zsh:1> cat /private/tmp/lab1-tools/runtime-share/rollback-vm-stopped.txt
+lab1-runtime Stopped
++zsh:1> test ! -e /private/tmp/lab1-lima/lab1-runtime/ha.pid
++zsh:1> test ! -e /private/tmp/lab1-lima/lab1-runtime/vz.pid
++zsh:1> lsof -nP -iTCP:65401 -sTCP:LISTEN
++zsh:1> lab1_listener_status=1 
++zsh:1> test 1 -eq 1
++zsh:1> set +x
+VM_STATUS=Stopped
+VM_PROCESS_FILES_ABSENT=true
+VM_SSH_PORT_65401_CLOSED=true

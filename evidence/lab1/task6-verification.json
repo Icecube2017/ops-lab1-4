@@ -1,0 +1,68 @@
+{
+  "date_beijing": "2026-10-21",
+  "started_at_utc": "2026-10-21T02:37:56Z",
+  "finished_at_utc": "2026-10-21T02:38:02Z",
+  "started_at_beijing": "2026-10-21 10:37:56 UTC+8",
+  "finished_at_beijing": "2026-10-21 10:38:02 UTC+8",
+  "environment": {
+    "os": "Alpine Linux 3.23.4",
+    "host_arch": "aarch64",
+    "binary_arch": "linux/amd64",
+    "qemu_x86_64": "10.1.5",
+    "gnu_tar": "1.35",
+    "git": "2.52.0"
+  },
+  "source_commit": "30e1b29012711519c19192c399954088668507da",
+  "command": "QEMU_X86_64=/usr/bin/qemu-x86_64 PORT=18080 bash -x scripts/verify-release-rollback.sh",
+  "script_modified": false,
+  "rebuilt_release_binaries": false,
+  "script_exit_code": 0,
+  "final_port_18080_closed": true,
+  "v1_0_0_matches_independent_pre_v1_0_1_baseline": true,
+  "releases": {
+    "1.0.0": {
+      "archive": "enroll-conflict_1.0.0_linux_amd64.tar.gz",
+      "sha256": "0d873c5b3c6de56d0de987a81c5760e92840b8bdc7f38d45ef15d6d0ef1cb33b",
+      "build_info": {
+        "name": "enroll-conflict",
+        "version": "1.0.0",
+        "build_no": "1",
+        "run_id": "39395666401",
+        "commit": "bc4b49ed0ea5becd29c643476e65b0b5834fb724",
+        "go": "go1.26.9"
+      },
+      "version_response": {
+        "version": "1.0.0",
+        "commit": "bc4b49ed0ea5becd29c643476e65b0b5834fb724",
+        "build_no": "1",
+        "go": "go1.26.9"
+      },
+      "trace_exit_code": 0,
+      "source_url": "https://github.com/Icecube2017/ops-lab1-4/releases/download/v1.0.0/enroll-conflict_1.0.0_linux_amd64.tar.gz"
+    },
+    "1.0.1": {
+      "archive": "enroll-conflict_1.0.1_linux_amd64.tar.gz",
+      "sha256": "4e86d5f92aacf9c8aa3062b03fc99a11119475797f4bfa647c10a4acc5b62c71",
+      "build_info": {
+        "name": "enroll-conflict",
+        "version": "1.0.1",
+        "build_no": "3",
+        "run_id": "39533349032",
+        "commit": "30e1b29012711519c19192c399954088668507da",
+        "go": "go1.26.9"
+      },
+      "version_response": {
+        "version": "1.0.1",
+        "commit": "30e1b29012711519c19192c399954088668507da",
+        "build_no": "3",
+        "go": "go1.26.9"
+      },
+      "trace_exit_code": 0,
+      "source_url": "https://github.com/Icecube2017/ops-lab1-4/releases/download/v1.0.1/enroll-conflict_1.0.1_linux_amd64.tar.gz"
+    }
+  },
+  "raw_execution_log": "release-rollback.txt",
+  "temporary_vm_stopped": true,
+  "vm_cleanup_verified_at_utc": "2026-10-21T02:38:55Z",
+  "raw_execution_log_sha256": "c4842980e24abd86e42a8fd23eaacb4e47a9e5b94d9495107302761432bf6d76"
+}
