@@ -16,3 +16,4 @@ go=go1.26.9
 版本号: 1.0.0    构建号: 1
 提交页面（含关联的 PR）: https://github.com/Icecube2017/ops-lab1-4/commit/bc4b49ed0ea5becd29c643476e65b0b5834fb724
 构建它的运行: https://github.com/Icecube2017/ops-lab1-4/actions/runs/39395666401
+trace_exit_code=0

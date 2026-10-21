@@ -36,28 +36,36 @@
 | 第二轮：撤销缺陷后通过的运行 | [#38844456518](https://github.com/Icecube2017/ops-lab1-4/actions/runs/38844456518)，分支头 `07eed8a75d60bbb3bb407f8248f2be03b03fdb2d`，结论 `success`；随后 squash 为 main 上的 [`6a561b0`](https://github.com/Icecube2017/ops-lab1-4/commit/6a561b0f6a9e858b1072ef06da1ed61c93166935)。 |
 | 未合入分支上的 tag 被 release gate 拒绝的运行 | [#39397895544](https://github.com/Icecube2017/ops-lab1-4/actions/runs/39397895544)：`v0.0.1` 指向 `b3f193475ca320b3d4063b718b9aa71df4d1087c`；页面注释为 `Release rejected: commit is not in main history`，9 s 后失败，未创建对应 Release。 |
 | Release v1.0.0 | [v1.0.0](https://github.com/Icecube2017/ops-lab1-4/releases/tag/v1.0.0)，由 [release #39395666401](https://github.com/Icecube2017/ops-lab1-4/actions/runs/39395666401) 构建并发布。 |
-| Release v1.0.1 | 尚未发布；任务 6 的 PR 审批、合入和发布完成后补录实际链接。 |
+| Release v1.0.1 | [v1.0.1](https://github.com/Icecube2017/ops-lab1-4/releases/tag/v1.0.1)，由 [release #39533349032](https://github.com/Icecube2017/ops-lab1-4/actions/runs/39533349032) 构建并发布，来源为已合入的 [PR #6](https://github.com/Icecube2017/ops-lab1-4/pull/6)。 |
 
 第二轮曾有一次先行尝试 [PR #3](https://github.com/Icecube2017/ops-lab1-4/pull/3)，其 [ci #38837827848](https://github.com/Icecube2017/ops-lab1-4/actions/runs/38837827848) 已失败，随后关闭且未合入；它不是“现有测试未发现缺陷”的成功证据。PR #4 在重排提交过程中还有其他运行，以上选用同一条最终提交链的“缺陷通过 → 补测试失败 → 撤销缺陷通过”作为复测证据。
 
 ## 4. 追溯与运行
 
-任务 6 状态：已下载、核验并追溯 v1.0.0，已保存其独立 SHA-256 基线；v1.0.1 须等本次 PR 经另一位组员审批并 squash 合入 main 后发布，随后才能实测两个版本的回退。下面的“待执行”不能作为已经完成的证据。
+任务 6 已于 **2026-10-21 10:37:56～10:38:02（UTC+8）**完成实际验证：从 GitHub 下载两个版本的原始 Release 附件，核对校验和，分别追溯，再在同一个 `127.0.0.1:18080` 端口先运行 v1.0.1、停止并等待该进程退出，然后换回 v1.0.0；全过程没有重新编译二进制。
+
+验证环境为临时 Alpine Linux 3.23.4 arm64 虚拟机，GNU tar 1.35、Git 2.52.0、QEMU x86_64 10.1.5 用户态模拟器。执行的是仓库中未经修改的脚本：
+
+```bash
+QEMU_X86_64=/usr/bin/qemu-x86_64 PORT=18080 bash -x scripts/verify-release-rollback.sh
+```
+
+完整脚本退出码为 `0`，两次 `trace.sh` 退出码均为 `0`，两次 `/version` 都与各自原附件的 BUILD_INFO 逐项相同；原始命令与输出见 [release-rollback.txt](evidence/lab1/release-rollback.txt)，结构化核对结果见 [task6-verification.json](evidence/lab1/task6-verification.json)。最后一个测试服务已停止并确认端口关闭，临时虚拟机也已停止。
 
 | 项 | v1.0.0 | v1.0.1 |
 |---|---|---|
-| 版本号 | `1.0.0` | 待发布后读取 BUILD_INFO |
-| 构建号 | `1` | 待发布后读取 BUILD_INFO |
-| 提交号（SHA） | `bc4b49ed0ea5becd29c643476e65b0b5834fb724` | 待 PR 合入后读取实际 squash 提交 |
-| 引入该提交的 PR | [#5](https://github.com/Icecube2017/ops-lab1-4/pull/5) | 本次任务 6 PR，创建后补编号 |
-| 构建它的 Actions 运行（`trace.sh` 给出的链接） | [release #39395666401](https://github.com/Icecube2017/ops-lab1-4/actions/runs/39395666401) | 待发布后读取实际 RUN_ID |
-| 制品 sha256（取自 Release 的 .sha256，并独立计算核对） | `0d873c5b3c6de56d0de987a81c5760e92840b8bdc7f38d45ef15d6d0ef1cb33b` | 待发布后下载并校验 |
+| 版本号 | `1.0.0` | `1.0.1` |
+| 构建号 | `1` | `3` |
+| 提交号（SHA） | `bc4b49ed0ea5becd29c643476e65b0b5834fb724` | `30e1b29012711519c19192c399954088668507da` |
+| 引入该提交的 PR | [#5](https://github.com/Icecube2017/ops-lab1-4/pull/5) | [#6](https://github.com/Icecube2017/ops-lab1-4/pull/6) |
+| 构建它的 Actions 运行（`trace.sh` 给出的链接） | [release #39395666401](https://github.com/Icecube2017/ops-lab1-4/actions/runs/39395666401) | [release #39533349032](https://github.com/Icecube2017/ops-lab1-4/actions/runs/39533349032) |
+| 制品 sha256（取自 Release 的 .sha256，并独立计算核对） | `0d873c5b3c6de56d0de987a81c5760e92840b8bdc7f38d45ef15d6d0ef1cb33b` | `4e86d5f92aacf9c8aa3062b03fc99a11119475797f4bfa647c10a4acc5b62c71` |
 
-v1.0.0 的附件与校验和均从 [Release v1.0.0](https://github.com/Icecube2017/ops-lab1-4/releases/tag/v1.0.0) 下载；在 v1.0.1 发布前，将原始校验和另存到 [evidence/lab1/v1.0.0.sha256](evidence/lab1/v1.0.0.sha256)，避免后续下载覆盖对照值。Release API 的原附件 digest 也为同一值。原始追溯输出见 [trace-v1.0.0.txt](evidence/lab1/trace-v1.0.0.txt)，本次 `trace.sh` 退出码为 `0`。
+两个附件与校验和分别来自 [Release v1.0.0](https://github.com/Icecube2017/ops-lab1-4/releases/tag/v1.0.0) 和 [Release v1.0.1](https://github.com/Icecube2017/ops-lab1-4/releases/tag/v1.0.1)。v1.0.0 的原始校验和在 v1.0.1 发布前已另存到 [v1.0.0.sha256](evidence/lab1/v1.0.0.sha256)，本次保留该独立基线不覆盖；新版本的原始校验和另存为 [v1.0.1.sha256](evidence/lab1/v1.0.1.sha256)。下载后的 `sha256sum -c` 均通过，v1.0.1 的 SHA-256 也与 GitHub Release 附件页显示的 digest 一致。
 
 仅凭构建号不能唯一确定运行：v1.0.0 的 `build_no=1` 对应 [release 的第 1 次运行 #39395666401](https://github.com/Icecube2017/ops-lab1-4/actions/runs/39395666401)，而 [ci 的第 1 次运行 #38597424522](https://github.com/Icecube2017/ops-lab1-4/actions/runs/38597424522) 是另一提交 `8ef969d4b6e2b0fe305329e250d7f685b2cde2c1` 的构建。`run_number` 按工作流分别计数，应使用 BUILD_INFO 的 `run_id` 定位具体运行；同一次运行的 Re-run 还需结合 `run_attempt` 区分尝试。
 
-发布 v1.0.1 之后重新下载 v1.0.0 的附件，计算得到的 sha256：**待执行**。目前的下载发生在 v1.0.1 发布之前，因此不能提前填成“发布后复核一致”。
+发布 v1.0.1 之后重新下载 v1.0.0，独立计算得到的 sha256 为 **`0d873c5b3c6de56d0de987a81c5760e92840b8bdc7f38d45ef15d6d0ef1cb33b`**，与上表及发布新版本前保存的基线完全一致。原始结果见 [archive-sha256.txt](evidence/lab1/archive-sha256.txt) 和 [baseline-check.txt](evidence/lab1/baseline-check.txt)。
 
 `trace.sh` 输出（v1.0.0）：
 
@@ -80,24 +88,48 @@ go=go1.26.9
 版本号: 1.0.0    构建号: 1
 提交页面（含关联的 PR）: https://github.com/Icecube2017/ops-lab1-4/commit/bc4b49ed0ea5becd29c643476e65b0b5834fb724
 构建它的运行: https://github.com/Icecube2017/ops-lab1-4/actions/runs/39395666401
+trace_exit_code=0
 ```
 
-`trace.sh` 输出（v1.0.1）：待发布后执行并粘贴原始输出，要求退出码为 0。
+`trace.sh` 输出（v1.0.1）：
 
-任务 6 第 4 步，两次 `/version` 输出：**待 v1.0.1 发布后，以 Release 原附件依次运行并回退，不能用本地 candidate 构建冒充**。可以在 Linux x86_64 主机上执行：
-
-```bash
-git fetch origin main --tags
-scripts/verify-release-rollback.sh
+```text
+== 1. 校验和
+enroll-conflict_1.0.1_linux_amd64.tar.gz: OK
+== 2. 制品里的 BUILD_INFO
+name=enroll-conflict
+version=1.0.1
+build_no=3
+run_id=39533349032
+commit=30e1b29012711519c19192c399954088668507da
+go=go1.26.9
+== 3. 提交 30e1b29012711519c19192c399954088668507da
+作者: Connor Anderson <beyond-the-reality@sjtu.edu.cn>
+时间: 2026-10-20T20:39:12+08:00
+标题: xcs-step6 fix: 禁止缓存版本信息并补充实验1记录 (#6)
+主干: 该提交在 origin/main 的历史上
+指向它的 tag: v1.0.1
+版本号: 1.0.1    构建号: 3
+提交页面（含关联的 PR）: https://github.com/Icecube2017/ops-lab1-4/commit/30e1b29012711519c19192c399954088668507da
+构建它的运行: https://github.com/Icecube2017/ops-lab1-4/actions/runs/39533349032
+trace_exit_code=0
 ```
 
-脚本将校验两个附件、比较 v1.0.0 独立基线并运行两个原二进制；结果在 `dist/release/trace-v1.0.0.txt`、`trace-v1.0.1.txt`、`version-v1.0.1.json`、`version-v1.0.0.json` 和 `baseline-check.txt`。将结果补回本节后，才算完成任务 6 检查点。
+任务 6 第 4 步，两次 `/version` 的原始输出：
 
-发布前的单版本运行预检（2026-10-20 18:15:32，UTC+8）：在临时 Alpine Linux 3.23.4 arm64 虚拟机内，使用 QEMU 10.1.5 用户态模拟器运行下载的原始 Linux amd64 二进制。实测 `/healthz` 为 `ok`，`/version` 如下；服务停止后已验证端口关闭，临时虚拟机也已停止。完整命令、架构、文件校验和与输出见 [v1.0.0-runtime.txt](evidence/lab1/v1.0.0-runtime.txt)。这是 v1.0.0 的单独预检，两版本切换仍待发布后执行。
+运行 v1.0.1 时（[version-v1.0.1.json](evidence/lab1/version-v1.0.1.json)）：
+
+```json
+{"version":"1.0.1","commit":"30e1b29012711519c19192c399954088668507da","build_no":"3","go":"go1.26.9"}
+```
+
+停止 v1.0.1，换回 v1.0.0 后（[version-v1.0.0.json](evidence/lab1/version-v1.0.0.json)）：
 
 ```json
 {"version":"1.0.0","commit":"bc4b49ed0ea5becd29c643476e65b0b5834fb724","build_no":"1","go":"go1.26.9"}
 ```
+
+两次输出明确显示版本号、提交号和构建号一起从 v1.0.1 的发布身份切回 v1.0.0 的发布身份；两份附件使用的 Go 版本同为 `go1.26.9`。完整日志记录了每次启动的 PID，以及切换前的 `kill`、`wait`，最后确认 `18080` 没有残留监听。
 
 ## 5. 数据
 
@@ -117,13 +149,14 @@ scripts/verify-release-rollback.sh
 
 原有记录将修复推送时间填写为 `2026-10-15 18:34:19（UTC+8）`；本次未取得该推送事件的原始记录，保留此说明但不将它当作已复核的测量点。公开 Git 记录中的 `18:07:41` 是提交时间，不能代替推送时间。
 
-提交到发布的间隔：以下三个 PR 的改动均已包含在 v1.0.0 中；第一列时间使用各 PR 第一个提交的 **committer date**，终点使用 Release 的 **published_at**，不把 PR 创建时间或 tag 时间混用为端点。
+提交到发布的间隔：PR #1/#4/#5 对应首次包含其改动的 v1.0.0，任务 6 的 PR #6 对应首次包含其改动的 v1.0.1；第一列时间使用各 PR 第一个提交的 **committer date**，终点使用 Release 的 **published_at**，不把 PR 创建时间或 tag 时间混用为端点。
 
 | PR | 第一个提交的时间（UTC+8） | 合入时间（UTC+8） | 对应 Release 的发布时间（UTC+8） | 提交到发布的间隔 |
 |---|---|---|---|---|
 | [#1](https://github.com/Icecube2017/ops-lab1-4/pull/1) | [2026-10-15 17:36:04](https://github.com/Icecube2017/ops-lab1-4/commit/3de8f12823499ad7ba886313c6863ead75a84ce7) | 2026-10-15 20:33:41 | [v1.0.0：2026-10-20 16:45:41](https://github.com/Icecube2017/ops-lab1-4/releases/tag/v1.0.0) | 4 天 23 小时 9 分 37 秒（428977 s） |
 | [#4](https://github.com/Icecube2017/ops-lab1-4/pull/4) | [2026-10-16 10:09:48](https://github.com/Icecube2017/ops-lab1-4/pull/4/commits/56dfb04c6431bf050b86a4c95e6eb17540896c31) | 2026-10-20 16:36:52 | [v1.0.0：2026-10-20 16:45:41](https://github.com/Icecube2017/ops-lab1-4/releases/tag/v1.0.0) | 4 天 6 小时 35 分 53 秒（369353 s） |
 | [#5](https://github.com/Icecube2017/ops-lab1-4/pull/5) | [2026-10-20 13:32:49](https://github.com/Icecube2017/ops-lab1-4/pull/5/commits/626f04103a72be16e93d175747a2abdc093e26ee) | 2026-10-20 16:38:29 | [v1.0.0：2026-10-20 16:45:41](https://github.com/Icecube2017/ops-lab1-4/releases/tag/v1.0.0) | 3 小时 12 分 52 秒（11572 s） |
+| [#6](https://github.com/Icecube2017/ops-lab1-4/pull/6) | [2026-10-20 18:50:56](https://github.com/Icecube2017/ops-lab1-4/pull/6/commits/e9b5307a21e9d794bb3c6caa0026eb57f828c14c) | 2026-10-20 20:39:12 | [v1.0.1：2026-10-21 10:30:34](https://github.com/Icecube2017/ops-lab1-4/releases/tag/v1.0.1) | 15 小时 39 分 38 秒（56378 s） |
 
 `ci` 工作流的运行时长：下面是两轮演练所取的完整 7 次样本，均按 Actions 页面的 **Total duration** 记录，包含第一次演练的两次失败，不删除较慢或失败的样本。
 
@@ -138,6 +171,19 @@ scripts/verify-release-rollback.sh
 | [#38844456518](https://github.com/Icecube2017/ops-lab1-4/actions/runs/38844456518) | PR #4（撤销缺陷，通过） | 30 s | 10-16 11:13:43 → 11:14:13 |
 
 这 7 次合计 194 s，均值 27.7 s，范围 20～34 s；PR 运行未打包，push 运行包含打包，因此不能只凭这组混合样本判断打包或缓存的单独成本。
+
+任务 6 的追加记录如下；时间来自 [PR #6](https://github.com/Icecube2017/ops-lab1-4/pull/6)、Release 和 Actions Summary，完整来源另存为 [task6-github-records.json](evidence/lab1/task6-github-records.json)。这两次 `ci` 与一次 `release` 单独列出，不混入上面两轮 gate 演练的 7 次样本均值。
+
+| 事件 | 时间（UTC+8） | 运行时长 | 链接 |
+|---|---|---|---|
+| 发起 PR #6 | 2026-10-20 18:52:00 | — | [PR #6](https://github.com/Icecube2017/ops-lab1-4/pull/6) |
+| PR 的 `ci`，成功 | 2026-10-20 18:52:04 开始 | 25 s | [#39410939648](https://github.com/Icecube2017/ops-lab1-4/actions/runs/39410939648) |
+| Icecube2017 审批通过 | 2026-10-20 20:39:03 | — | [审批记录](https://github.com/Icecube2017/ops-lab1-4/pull/6#pullrequestreview-5585083249) |
+| squash 合入 main | 2026-10-20 20:39:12 | — | [`30e1b29`](https://github.com/Icecube2017/ops-lab1-4/commit/30e1b29012711519c19192c399954088668507da) |
+| main push 的 `ci`，成功并产出制品 | 2026-10-20 20:39:15 开始 | 61 s | [#39423930548](https://github.com/Icecube2017/ops-lab1-4/actions/runs/39423930548) |
+| tag 触发 `release`，成功 | 2026-10-21 10:30:01 开始 | 36 s | [#39533349032](https://github.com/Icecube2017/ops-lab1-4/actions/runs/39533349032) |
+| v1.0.1 发布 | 2026-10-21 10:30:34 | — | [Release](https://github.com/Icecube2017/ops-lab1-4/releases/tag/v1.0.1) |
+| Linux 实测追溯与回退 | 2026-10-21 10:37:56～10:38:02 | 6 s（本次本地验证） | [原始执行日志](evidence/lab1/release-rollback.txt) |
 
 ## 6. 分析问题
 
@@ -172,9 +218,9 @@ scripts/verify-release-rollback.sh
 
 **问题 4：发布与回退。** 假设 v1.0.1 发布后发现缺陷，应当如何处理？为什么不应删除 v1.0.1 的 tag、再用同一版本号重新发布？任务 6 中将服务从 v1.0.1 切换回 v1.0.0 时，使用的是哪个文件，是否需要重新构建？请用两次 `/version` 的输出说明。如果改为从源码重新构建 v1.0.0，得到的文件与原附件是否相同（参考问题 3）？最后，如果有人删除 v1.0.0 的附件，换上一个新文件和对应的新 `.sha256`，`trace.sh` 能否发现？本组在第 4 节记录的值能否发现？可以查阅 GitHub 的 Immutable releases 设置的用途。
 
-所用数据：第 4 节记录的 v1.0.0 原附件 SHA-256、BUILD_INFO 和成功追溯输出；问题 3 的五次哈希与 `vcs.modified`；[v1.0.0 Release API](https://api.github.com/repos/Icecube2017/ops-lab1-4/releases/tags/v1.0.0) 当前显示 `immutable=false`。本次尚未取得 v1.0.1 发布后两次 `/version` 的实测输出，以下是操作方案与已有证据能支持的分析，回退实测结论仍待补齐。
+所用数据：第 4 节两个版本的 BUILD_INFO、成功追溯输出和两次真实 `/version`；v1.0.0 在 v1.0.1 发布前保存的基线与发布后重新下载得到的 SHA-256；问题 3 的五次哈希与 `vcs.modified`。2026-10-20 采集的 [v1.0.0 Release API 快照](evidence/lab1/github-records.json) 显示 `immutable=false`。
 
-若 v1.0.1 发布后发现缺陷，应保留该版本的发布记录并将运行服务切回已经验证的 v1.0.0 附件，修复经 PR、审批和检查后用新版本号（例如 v1.0.2）发布。删除 v1.0.1 的 tag 再复用同一版本号，会让同名版本指向不同提交或不同字节，使下载缓存、使用者和历史记录对“v1.0.1”产生歧义。本实验回退应运行从 `enroll-conflict_1.0.0_linux_amd64.tar.gz` 解出的 `enroll-conflict_1.0.0_linux_amd64/enroll-conflict`，无需重建，且 `/version` 必须返回第 4 节对应的 `version=1.0.0`、`build_no=1`、`commit=bc4b49ed0ea5becd29c643476e65b0b5834fb724`；这些是待实测核对的目标，不能冒充已经取得的输出。问题 3 已表明源码提交相同仍不足以保证重建文件与原附件相同，只有工具链、所有编译输入、元数据、工作区状态及归档条件都相同时才有可重复的前提，因此回退直接使用原附件更可靠。`trace.sh` 只会检查附件与当前同目录 `.sha256` 一致、声明的提交存在且属于主干，因此如果附件与 `.sha256` 同时被换掉并保留合法的 BUILD_INFO，它可能仍然成功，无法独立认证附件由所声称的 Actions 运行构建。第 4 节在新版本发布前另存的原始 SHA-256 能在新文件字节改变时发现替换，前提是这份独立记录本身可信且没有一起被篡改。[GitHub Immutable releases](https://docs.github.com/en/code-security/concepts/supply-chain-security/immutable-releases) 能锁定发布附件及关联 tag 并生成 release attestation，但本组当前的 v1.0.0 并未启用该保护，不能把产品提供的能力写成本组已经具有的保证。
+若 v1.0.1 发布后发现缺陷，应保留该版本的发布记录并将运行服务切回已经验证的 v1.0.0 附件，修复经 PR、审批和检查后用新版本号（例如 v1.0.2）发布。删除 v1.0.1 的 tag 再复用同一版本号，会让同名版本指向不同提交或不同字节，使下载缓存、使用者和历史记录对“v1.0.1”产生歧义。本次实测直接运行从 `enroll-conflict_1.0.0_linux_amd64.tar.gz` 解出的原二进制完成回退，没有重新构建，`/version` 从 `1.0.1 / 30e1b290… / build_no=3` 切换成 `1.0.0 / bc4b49ed… / build_no=1`，两次响应均与相应附件的 BUILD_INFO 一致。问题 3 已表明源码提交相同仍不足以保证重建文件与原附件相同，只有工具链、所有编译输入、元数据、工作区状态及归档条件都相同时才有可重复的前提，因此回退直接使用原附件更可靠。`trace.sh` 只会检查附件与当前同目录 `.sha256` 一致、声明的提交存在且属于主干，因此如果附件与 `.sha256` 同时被换掉并保留合法的 BUILD_INFO，它可能仍然成功，无法独立认证附件由所声称的 Actions 运行构建。第 4 节在新版本发布前另存的原始 SHA-256 能在新文件字节改变时发现替换，本次发布后实测仍为 `0d873c5b3c6de56d0de987a81c5760e92840b8bdc7f38d45ef15d6d0ef1cb33b`，这个判断的前提是独立记录本身可信且没有一起被篡改。[GitHub Immutable releases](https://docs.github.com/en/code-security/concepts/supply-chain-security/immutable-releases) 能锁定发布附件及关联 tag 并生成 release attestation，而本组已记录的 v1.0.0 未启用该保护，因此仍需保存可信的独立基线。
 
 ## 7. 选做记录
 
@@ -186,11 +232,12 @@ scripts/verify-release-rollback.sh
 
 ## 8. 成员贡献
 
-下表只列已有 PR 页面和审批记录中可核验的 4 个参与账号，不填写姓名；“无”表示截至当前记录尚无证据，不能将审批或别人的 PR 计作本人发起并合入的 PR。
+下表只列已有 PR 页面和审批记录中可核验的 5 个参与账号，不填写姓名；“无”表示截至当前记录尚无证据，不能将审批或别人的 PR 计作本人发起并合入的 PR。
 
 | GitHub 用户名 | 发起并合入的 PR 编号 | 审批过的 PR 编号 |
 |---|---|---|
 | sugeladi2450 | [#1](https://github.com/Icecube2017/ops-lab1-4/pull/1)、[#2](https://github.com/Icecube2017/ops-lab1-4/pull/2) | 无已核验记录 |
 | Vollerei6 | [#4](https://github.com/Icecube2017/ops-lab1-4/pull/4)；[#3](https://github.com/Icecube2017/ops-lab1-4/pull/3) 已关闭未合入，不计入 | 无已核验记录 |
 | Graham1019 | [#5](https://github.com/Icecube2017/ops-lab1-4/pull/5) | 无已核验记录 |
-| Icecube2017 | 无已核验的本人发起并合入 PR；任务 6 完成后据实更新 | [#1](https://github.com/Icecube2017/ops-lab1-4/pull/1#pullrequestreview-5533132002)、[#2](https://github.com/Icecube2017/ops-lab1-4/pull/2)、[#4](https://github.com/Icecube2017/ops-lab1-4/pull/4)、[#5](https://github.com/Icecube2017/ops-lab1-4/pull/5) |
+| Icecube2017 | 无已核验的本人发起并合入 PR | [#1](https://github.com/Icecube2017/ops-lab1-4/pull/1#pullrequestreview-5533132002)、[#2](https://github.com/Icecube2017/ops-lab1-4/pull/2)、[#4](https://github.com/Icecube2017/ops-lab1-4/pull/4)、[#5](https://github.com/Icecube2017/ops-lab1-4/pull/5)、[#6](https://github.com/Icecube2017/ops-lab1-4/pull/6#pullrequestreview-5585083249) |
+| ConnorAnderson-coding | [#6](https://github.com/Icecube2017/ops-lab1-4/pull/6) | 无已核验记录 |

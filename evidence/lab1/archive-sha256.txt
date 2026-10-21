@@ -1,0 +1,2 @@
+0d873c5b3c6de56d0de987a81c5760e92840b8bdc7f38d45ef15d6d0ef1cb33b  /mnt/lab1/rollback-repo/dist/release/enroll-conflict_1.0.0_linux_amd64.tar.gz
+4e86d5f92aacf9c8aa3062b03fc99a11119475797f4bfa647c10a4acc5b62c71  /mnt/lab1/rollback-repo/dist/release/enroll-conflict_1.0.1_linux_amd64.tar.gz
