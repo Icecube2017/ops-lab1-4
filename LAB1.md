@@ -1,4 +1,4 @@
-# 实验 1 记录：第 <组号> 组
+# 实验 1 记录：第 4 组
 
 现场检查时将打开本文件，按其中的链接核对。证据一律以链接或文本形式给出，不要只贴截图。将 `<填写>` 替换为本组的内容。main 受保护之后，修改本文件也须通过 PR。
 
@@ -6,34 +6,46 @@
 
 | 项 | 内容 |
 |---|---|
-| 小组 | 第 <组号> 组 |
-| 仓库地址 | <https://github.com/…> |
-| 代码载体 | 统一示例 / 自己的项目（<项目名与语言>） |
-| runner 与语言版本 | `ubuntu-24.04`，<Go 或其他语言的版本> |
-| 合并方式 | <squash / merge commit / rebase> |
+| 小组 | 第 4 组 |
+| 仓库地址 | https://github.com/Icecube2017/ops-lab1-4 |
+| 代码载体 | 统一示例 |
+| runner 与语言版本 | `ubuntu-24.04`，`Go 1.27.1`（本地）/`1.26.9`（ci） |
+| 合并方式 | squash |
 
 ## 2. 任务 0：本地基线
 
 | 问题 | 观察结果 |
 |---|---|
-| 第一次 `make package` 得到的 BUILD_INFO（粘贴） | <填写> |
-| 修改一行、不提交，再次打包：BUILD_INFO 是否变化？二进制文件的 sha256 是否变化？（贴出两次的 sha256） | <填写> |
-| 两次 `go version -m` 输出中的 vcs 行有何不同？ | <填写> |
-| 仅凭 BUILD_INFO，能否回答该包是什么、在哪台机器上、何时、用哪份代码构建？哪一项信息会出错？ | <填写> |
+| 第一次 `make package` 得到的 BUILD_INFO（粘贴） | name=enroll-conflict version=1.0.0 build_no=1 run_id=local commit=7b63b41c13f061439997b0e6e4eaa2af922a7aa1 go=go1.27.1 （基线在模板根提交上完成，本仓库从 f2fe19f 开始） |
+| 修改一行、不提交，再次打包：BUILD_INFO 是否变化？二进制文件的 sha256 是否变化？（贴出两次的 sha256） | BUILD_INFO没有变化。第一次: 2eb509863705cd6b442ec59584abfb43ad7492d8704a98807c217885f02e1477 第二次: 975c85486892af40d78a5d0bf09063608b761197e77639db2a63364bd08c659c|
+| 两次 `go version -m` 输出中的 vcs 行有何不同？ | 第一次：vcs=git vcs.revision=7b63b41c13f061439997b0e6e4eaa2af922a7aa1 vcs.time=2026-10-12T16:26:07Z vcs.modified=false 第二次：前三行不变，最后一行为 vcs.modified=true |
+| 仅凭 BUILD_INFO，能否回答该包是什么、在哪台机器上、何时、用哪份代码构建？哪一项信息会出错？ | BUILD_INFO没有记录构建机器和构建时间，所以没法回答这两项；工作区有未提交修改，它不会包含在BUILD_INFO里，所以“用哪份代码构建”这一项会出错 |
 
 ## 3. 证据
 
 | 项 | 链接或文本 |
 |---|---|
-| 规则集里启用的规则 | [公开分支信息](https://api.github.com/repos/Icecube2017/ops-lab1-4/branches/main)显示 `main` 受保护；尚未取得 Settings → Rulesets 的实际配置，不能据此断言具体规则、审批人数或 bypass 设置。待组长核验并补录 `Restrict deletions`、`Block force pushes`、`Require a pull request before merging`（至少 1 人审批）、`Require status checks to pass`（`ci`）及空 bypass list。以上是课程要求，尚不冒充已核验配置。 |
-| 组长直接 `git push origin main` 被拒的终端输出 | 尚未取得本组该次操作的原始终端输出，待组长补录；课程中的示例输出不能作为本组实测证据。 |
+| 规则集里启用的规则 | https://github.com/Icecube2017/ops-lab1-4/rules/25098208
+Bypass list: empty, Target Branches: main （对管理员同样生效）
+#1 Restrict Deletions
+#2 Require a pull request before merging, required approval = 1
+#3 Require status checks to pass, required status checks: ci
+#4 Block force pushes |
+| 组长直接 `git push origin main` 被拒的终端输出 | remote: error: GH013: Repository rule violations found for refs/heads/main.
+remote: Review all repository rules at https://github.com/Icecube2017/ops-lab1-4/rules?ref=refs%2Fheads%2Fmain
+remote: 
+remote: - Changes must be made through a pull request.
+remote: 
+To https://github.com/Icecube2017/ops-lab1-4.git
+ ! [remote rejected] main -> main (push declined due to repository rule violations)
+error: failed to push some refs to 'https://github.com/Icecube2017/ops-lab1-4.git' |
 | 第一轮：失败的 PR 运行 | [PR #1](https://github.com/Icecube2017/ops-lab1-4/pull/1)；[首次失败 #38717014937](https://github.com/Icecube2017/ops-lab1-4/actions/runs/38717014937)，同一缺陷的[再次失败 #38717249517](https://github.com/Icecube2017/ops-lab1-4/actions/runs/38717249517)。 |
 | 第一轮：修复后通过的 PR 运行 | [#38721221556](https://github.com/Icecube2017/ops-lab1-4/actions/runs/38721221556)，分支头 `e918261c40630d70c3dff2062e947fd36b60e8b4`。 |
 | 第一轮：合入 main 后的运行（含制品） | [#38735583504](https://github.com/Icecube2017/ops-lab1-4/actions/runs/38735583504)，main 提交 `fe8bc546fe879a37f873985a864b631c02247394`。 |
 | 第二轮：找到的缺陷，以及现有测试为何无法发现它 | [PR #4](https://github.com/Icecube2017/ops-lab1-4/pull/4) 的缺陷提交 `56dfb04` 让 `Valid()` 接受必填 `weeks` 缺失后产生的零值空串；旧 `TestValid` 的非法周次只测 `weekly`，冲突用例只构造 `all/odd/even`，没有验证缺失字段。补入 `TestRejectsSectionWithoutWeeks` 后可检出，最后撤销缺陷，只将新增测试合入 main。 |
 | 第二轮：仅含缺陷时仍然通过的运行 | [#38843194354](https://github.com/Icecube2017/ops-lab1-4/actions/runs/38843194354)，分支头 `56dfb04c6431bf050b86a4c95e6eb17540896c31`，结论 `success`。 |
 | 第二轮：补测试后失败的运行 | [#38844389381](https://github.com/Icecube2017/ops-lab1-4/actions/runs/38844389381)，分支头 `6f331368993c559826a0ec15db592fe4034bb8c9`，结论 `failure`。 |
-| 第二轮：撤销缺陷后通过的运行 | [#38844456518](https://github.com/Icecube2017/ops-lab1-4/actions/runs/38844456518)，分支头 `07eed8a75d60bbb3bb407f8248f2be03b03fdb2d`，结论 `success`；随后 squash 为 main 上的 [`6a561b0`](https://github.com/Icecube2017/ops-lab1-4/commit/6a561b0f6a9e858b1072ef06da1ed61c93166935)。 |
+| 第二轮：撤销缺陷后通过的运行 | [#38844456518](https://github.com/Icecube2017/ops-lab1-4/actions/runs/38844456518)，分支头 `07eed8a75d60bbb3bb407f8248f2be03b03fdb2d`，结论 `success`；[组员审批](https://github.com/Icecube2017/ops-lab1-4/pull/4#pullrequestreview-5542758524) 2026-10-16 11:33:05，squash 合入 main 2026-10-20 16:36:52，合入提交 [`6a561b0`](https://github.com/Icecube2017/ops-lab1-4/commit/6a561b0f6a9e858b1072ef06da1ed61c93166935)。 |
 | 未合入分支上的 tag 被 release gate 拒绝的运行 | [#39397895544](https://github.com/Icecube2017/ops-lab1-4/actions/runs/39397895544)：`v0.0.1` 指向 `b3f193475ca320b3d4063b718b9aa71df4d1087c`；页面注释为 `Release rejected: commit is not in main history`，9 s 后失败，未创建对应 Release。 |
 | Release v1.0.0 | [v1.0.0](https://github.com/Icecube2017/ops-lab1-4/releases/tag/v1.0.0)，由 [release #39395666401](https://github.com/Icecube2017/ops-lab1-4/actions/runs/39395666401) 构建并发布。 |
 | Release v1.0.1 | [v1.0.1](https://github.com/Icecube2017/ops-lab1-4/releases/tag/v1.0.1)，由 [release #39533349032](https://github.com/Icecube2017/ops-lab1-4/actions/runs/39533349032) 构建并发布，来源为已合入的 [PR #6](https://github.com/Icecube2017/ops-lab1-4/pull/6)。 |
@@ -147,6 +159,18 @@ trace_exit_code=0
 | 组员审批通过 | 2026-10-15 20:33:30 | [Icecube2017 的审批](https://github.com/Icecube2017/ops-lab1-4/pull/1#pullrequestreview-5533132002) |
 | 合入 main | 2026-10-15 20:33:41 | [`fe8bc54`](https://github.com/Icecube2017/ops-lab1-4/commit/fe8bc546fe879a37f873985a864b631c02247394) |
 
+第二轮 gate 演练的时间线：
+
+| 事件 | 时间（UTC+8） | 链接 |
+|---|---|---|
+| 缺陷提交 `56dfb04`（committer date） | 2026-10-16 10:09:48 | [`56dfb04`](https://github.com/Icecube2017/ops-lab1-4/commit/56dfb04c6431bf050b86a4c95e6eb17540896c31) |
+| 发起 PR #4 | 2026-10-16 10:58:54 | [PR #4](https://github.com/Icecube2017/ops-lab1-4/pull/4) |
+| 仅含缺陷的 `ci` 通过（开始 → 结束） | 2026-10-16 10:58:58 → 10:59:18 | [#38843194354](https://github.com/Icecube2017/ops-lab1-4/actions/runs/38843194354) |
+| 补测试后的 `ci` 失败（开始 → 结束） | 2026-10-16 11:12:56 → 11:13:16 | [#38844389381](https://github.com/Icecube2017/ops-lab1-4/actions/runs/38844389381) |
+| 撤销缺陷后的 `ci` 通过（开始 → 结束） | 2026-10-16 11:13:43 → 11:14:13 | [#38844456518](https://github.com/Icecube2017/ops-lab1-4/actions/runs/38844456518) |
+| 组员审批通过 | 2026-10-16 11:33:05 | [PR #4 的审批](https://github.com/Icecube2017/ops-lab1-4/pull/4#pullrequestreview-5542758524) |
+| squash 合入 main | 2026-10-20 16:36:52 | [`6a561b0`](https://github.com/Icecube2017/ops-lab1-4/commit/6a561b0f6a9e858b1072ef06da1ed61c93166935) |
+
 原有记录将修复推送时间填写为 `2026-10-15 18:34:19（UTC+8）`；本次未取得该推送事件的原始记录，保留此说明但不将它当作已复核的测量点。公开 Git 记录中的 `18:07:41` 是提交时间，不能代替推送时间。
 
 提交到发布的间隔：PR #1/#4/#5 对应首次包含其改动的 v1.0.0，任务 6 的 PR #6 对应首次包含其改动的 v1.0.1；第一列时间使用各 PR 第一个提交的 **committer date**，终点使用 Release 的 **published_at**，不把 PR 创建时间或 tag 时间混用为端点。
@@ -191,15 +215,18 @@ trace_exit_code=0
 
 **问题 1：gate 的收益与成本。** 两轮演练中，gate 拦住了什么，没有拦住什么？用第 5 节的时间线计算：第一轮因失败多花了多少时间，其中等待 `ci` 的时间和人工修改的时间各占多少？一次 `ci` 大约需要多久，在“提交到发布的间隔”中占多大比例？第二轮补充测试之后，还有哪类问题是测试本身无法发现的？
 
-所用数据：第 5 节第一轮时间线、7 次 `ci` 时长及 PR #1/#4/#5 的提交到发布时间；第 3 节 PR #4 的三次复测运行。
+所用数据：第 5 节第一轮时间线（PR #1 创建、两次失败、修复提交、修复通过、审批、合入）、7 次 `ci` 时长、PR #1/#4/#5 的提交到发布间隔；第 3 节 PR #4 的三次复测运行；第 5 节第二轮时间线。
 
-第一轮的已有断言使“单周与双周错误地判为冲突”的改动出现红灯，第二轮的缺失 `weeks` 缺陷却先通过自动检查，新增零值校验测试后才失败，说明 gate 能执行规则，而测试覆盖决定它能发现哪些行为。第一轮从发起 PR 到修复通过共 35 分 26 秒，以首次失败结束到修复通过定义“恢复窗口”则为 34 分 53 秒，其中后续两次 `ci` 执行共 61 秒，其余 33 分 52 秒包括人工处理、重新触发及未单独测量的等待，不能全部声称是实际修改代码的时间。没有一次“首次就通过”的同条件对照，不能严格把整个恢复窗口都解释成失败造成的净增成本。绿色到合入又过了 1 小时 58 分 47 秒，审批在合入前 11 秒完成，这部分也不能归为测试失败的成本。7 次样本中一次 `ci` 约 20～34 秒、均值 27.7 秒，以该均值除以 PR #1/#4/#5 的提交到发布间隔，分别约为 0.0065%、0.0075%、0.2395%，表明这次作业的长间隔主要不在单次自动检查。上述比例只表示一次运行相对整个历时的量级，不能代表累计流水线成本或真实团队的交付水平，因为样本少、共享 runner 存在噪声，且 PR 与 push 步骤不同。即使补上零值测试，也只能验证已经写入断言并在测试环境中执行的情形，尚未表达的业务规则、生产依赖变化及未覆盖的性能和安全问题仍需审查、集成测试和运行观测；结论成立还依赖必需检查确实绑定最新提交并且没有 bypass。
+两轮演练中，gate 拦住的是第一轮“单周对双周被错误判为冲突”的回归：PR #1 的首次运行因已有断言变红，修复前无法合入；没有拦住的是第二轮 `weeks` 缺失的零值缺陷——它先以 [#38843194354](https://github.com/Icecube2017/ops-lab1-4/actions/runs/38843194354) 通过，补入 `TestRejectsSectionWithoutWeeks` 后才以 [#38844389381](https://github.com/Icecube2017/ops-lab1-4/actions/runs/38844389381) 失败，说明 gate 能执行规则，但是否能发现问题取决于测试覆盖。
+第一轮从发起 PR 到修复通过为 35 分 26 秒，其中首次失败前 33 秒，首次失败结束到修复通过的恢复窗口为 34 分 53 秒。按第 5 节时间戳可拆为：两次 CI 执行 30 s + 31 s = 61 s（2.9%）；第二次失败结束到修复提交 18:07:41 为 5 分 50 秒（16.7%），这是有 Git 记录的人工修改上限；首次失败结束到第二次运行开始 1 分 20 秒（3.8%）；修复提交到成功运行开始 26 分 42 秒（76.5%），其中包含推送前等待、排队和未记录操作。按原记录的自记推送时间 18:34:19，可归为 CI 的只有推送后 4 秒加执行 61 秒，约 65 秒（3.1%）；其余 27 分 58 秒（80.2%）是推送前等待和重触发，其中 26 分 38 秒来自自记值，未取得 GitHub 原始事件，不能当作已复核测量。
+7 次 CI 样本为 20～34 秒、均值 27.7 秒；以该均值除 PR #1/#4/#5 的提交到发布间隔，分别约 0.0065%、0.0075%、0.2394%，说明长间隔主要不在单次自动检查。上述 34 分 53 秒应视为失败造成的成本上限：没有一次首次就通过的同条件对照，不能严格证明全部都是净增成本，而且样本少、共享 runner 有噪声、PR 与 push 步骤不同。
+即使补上零值测试，测试也只能验证已写入断言且在测试环境中执行的情形，未表达的业务规则、生产依赖变化、性能与安全问题仍需审查、集成测试和运行观测；结论还依赖必需检查确实绑定最新提交且没有 bypass。
 
 **问题 2：PR 中的构建与 main 上的构建。** 在 PR 触发的运行日志中，`github.sha` 与 `pull_request.head.sha` 是否相同？它们能否在 main 的历史中找到？答案与合并方式有关，请写明本组使用的方式。合并之后，main 上这次改动的提交号是哪个？据此说明，为什么待发布的制品只能从 main 上的提交或 tag 构建。
 
-所用数据：[PR #1 的两个分支提交](https://github.com/Icecube2017/ops-lab1-4/pull/1/commits) 为 `3de8f12823499ad7ba886313c6863ead75a84ce7`、`e918261c40630d70c3dff2062e947fd36b60e8b4`；[合入后的单个提交](https://github.com/Icecube2017/ops-lab1-4/commit/fe8bc546fe879a37f873985a864b631c02247394) 为 `fe8bc546fe879a37f873985a864b631c02247394`；`.github/workflows/ci.yml` 在测试前打印四个上下文字段，且 `actions/checkout` 未指定 `ref`。
+所用数据：PR #1 的两个分支提交 `3de8f128…`、`e918261…`；[#38721221556](https://github.com/Icecube2017/ops-lab1-4/actions/runs/38721221556) 的 `Show run context` 四个字段（`github.event_name=pull_request`、`github.ref=refs/pull/1/merge`、`github.sha=0301f9c…`、`github.event.pull_request.head.sha=e918261…`）；[`0301f9c`](https://github.com/Icecube2017/ops-lab1-4/commit/0301f9c1235b663d9199fdba53f6ca44eb56562a) 的父提交 `8ef969d…` 与 `e918261…`；main 上的 squash 提交 [`fe8bc54`](https://github.com/Icecube2017/ops-lab1-4/commit/fe8bc546fe879a37f873985a864b631c02247394)（单父 `8ef969d…`）；v1.0.0 的构建提交 [`bc4b49e`](https://github.com/Icecube2017/ops-lab1-4/commit/bc4b49ed0ea5becd29c643476e65b0b5834fb724) 与 tag；`.github/workflows/ci.yml` 的 `actions/checkout` 未指定 `ref`。
 
-本组使用 squash，PR #1 的两个分支提交被合成 main 上一个有单一父提交的新提交 `fe8bc546fe879a37f873985a864b631c02247394`，原来的 `e918261…` 不是这次改动在 main 上的身份。按 [GitHub 的 `pull_request` 事件定义](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#pull_request)，默认 checkout 使用 `refs/pull/1/merge`，因此 `github.sha` 表示临时合并提交，而 `github.event.pull_request.head.sha` 表示分支头 `e918261c40630d70c3dff2062e947fd36b60e8b4`，两者通常不同。公开 Actions Summary 和 API 的 `head_sha` 不能代替 `Show run context` 步骤中 `github.sha` 的原始日志，本次尚未取得该历史步骤的逐行日志，因此具体临时合并 SHA 仍待据实补录，不能将推断写成实测。对本次 squash 来说，PR 分支头和临时合并提交均不会作为最终提交保留在 main 的这条线性历史中；若采用 merge commit，分支提交可以保留，结论便不同。main 的 push 构建使用已经合入的 `fe8bc546…`，而 v1.0.0 从包含后续 PR 的 main 提交 `bc4b49ed0ea5becd29c643476e65b0b5834fb724` 构建，由提交记录中的 PR 编号能够继续追溯。待发布制品因此须绑定经审批、检查并合入的 main 提交或其 tag，不能把 PR 临时合并状态的产物直接当成已进入主干的发布版本；这个保证还依赖 release gate 对 tag 祖先关系的检查。
+本组使用 squash。PR #1 的 [#38721221556](https://github.com/Icecube2017/ops-lab1-4/actions/runs/38721221556) 的 `Show run context` 实测为 `github.event_name=pull_request`、`github.ref=refs/pull/1/merge`、`github.sha=0301f9c…`、`github.event.pull_request.head.sha=e918261…`，两者不同：前者是 GitHub 为 PR 生成的临时合并提交，后者是分支头。`0301f9c` 的父提交是 main 当时的 `8ef969d` 和分支头 `e918261`，它只存在于 `refs/pull/1/merge` 这条临时 ref 上，不在 main 的线性历史中；`e918261` 也不在 main 上。squash 合入后，main 上这次改动的身份是单父提交 `fe8bc54`（父提交 `8ef969d`），分支头和临时合并提交都不会作为 main 的历史提交保留；若采用 merge commit，分支提交则可能保留，结论会不同。PR 中构建的是“基线 + 分支头”的临时合并结果，而 main push 构建的是已合入的 `fe8bc54`，两者不是同一个提交；v1.0.0 又是在后续 main 提交 `bc4b49e` 上打的 tag。待发布制品因此只能从经审批、检查并合入的 main 提交或 tag 构建，不能把 PR 临时合并状态的产物直接当作已进入主干的发布版本；这一保证还依赖 release gate 检查 tag 提交是否为 main 的祖先。以上结论以默认 checkout 和 squash 为前提；若工作流显式指定 `ref`/`head.sha`，或改用 merge commit，`github.sha` 与提交保留情况会不同。
 
 **问题 3：可重复构建。** 在本地同一个提交上按下表构建，记录哈希值。④、⑤ 需临时去掉 Makefile 中 tar 的 `--mtime=@0`，完成后用 `git checkout -- Makefile` 恢复，不要提交。
 
@@ -210,11 +237,11 @@ trace_exit_code=0
 | ③ | 仅将 `BUILD_NO` 从 7 改为 8 | `73be078d7444d2548e6e907ed041de22b54c77d97dee9408193353f71f4e05d0` | `b85f978029c0577ed58106bdd3115a5ac5ebbc8cbe2500b0e02303a0be04da08` |
 | ④ | 去掉 `--mtime=@0`，其余同 ① | `50d95ba729e594dc5eba409b6c36dabf935047259af5f62df6d23751aa5eeb2b` | `f254e8ac45257a720a4f9e1b85e8fd360cfe2b9877315056f2092034fbfb19e6` |
 | ⑤ | 同 ④，间隔约 3 秒再构建 | `50d95ba729e594dc5eba409b6c36dabf935047259af5f62df6d23751aa5eeb2b` | `5ccf9e4517a31467e8bc05a19c13355a43d77320d8fc50fdee73068367f63f46` |
-| Actions | 对 main 的同一次 push 执行 Re-run all jobs | 待有权限的组员实际比较两次尝试 | 待有权限的组员实际比较两次尝试 |
+| Actions | 对 main 的同一次 push（39423930548） 执行 Re-run all jobs，两次结果一致 | `86679c454ebba3fb0aff9c494a51b9d58a029662ef49eb4ceea98eb7d6ef32ff` | `d14b46feeb1dada940eb701cb384a479a43cfeda41118decfbe2ac48281035dd` |
 
 所用数据：[五次构建的完整记录](evidence/lab1/reproducible-builds.json)。实验在独立的干净克隆上进行，提交固定为 `bc4b49ed0ea5becd29c643476e65b0b5834fb724`，工具为 Go `1.26.9`、GNU tar `1.35` 和 Apple gzip `457.140.3`；宿主为 macOS arm64，交叉编译目标为 `linux/amd64`，不是声称在 Ubuntu 上取得的哈希。固定参数是 `VERSION=1.0.0 BUILD_NO=7 RUN_ID=123 COMMIT=bc4b49ed0ea5becd29c643476e65b0b5834fb724`，③仅改构建号，④⑤仅临时修改该克隆的 Makefile，完成后已经恢复，主工作仓库 Makefile 未改动。
 
-①②的二进制与归档哈希均相同，说明在本次工具链、目标架构、参数、文件权限和工作区状态都相同的条件下，两次构建可重复；不能仅凭同一个提交就推断任意机器和工具版本都能得到相同文件。③将构建号写进二进制和 BUILD_INFO，因此两个哈希都改变。④的二进制不同于①，`go version -m` 的实测结果是 `vcs.revision` 和 `vcs.time` 保持不变，但 `vcs.modified` 从 `false` 变为 `true`（模块构建信息也带 `+dirty`），说明临时修改 Makefile 仍会被 Go 的 VCS 信息记录，不能把二进制差异归因于 tar 时间参数。④⑤的二进制相同而归档不同，因为未固定 tar 的文件修改时间，重写 BUILD_INFO 和二进制的实际时间进入了归档。制品应携带稳定且能追溯的版本、提交、构建号、运行 ID、工具链和目标信息，发布前应要求工作区干净，避免无必要的当前时间、绝对构建路径或随机值破坏重复性。当前 `ci` 把版本编译为 `0.0.0-main`，`release` 则通过 `-ldflags` 把 tag 的版本写进二进制，所以发布时必须再编译，这偏离了跨阶段使用同一个制品的严格“一次构建、多处部署”，代价是额外的编译与测试，以及两次环境和参数可能漂移。对已经生成的某个 Release，部署和回退仍应直接使用同一份附件；Actions Re-run 的哈希比较尚未执行，必须取得两次真实日志，不能以本地结果或理论推断替代该项证据。
+①②的二进制与归档哈希均相同，说明在本次工具链、目标架构、参数、文件权限和工作区状态都相同的条件下，两次构建可重复；不能仅凭同一个提交就推断任意机器和工具版本都能得到相同文件。③将构建号写进二进制和 BUILD_INFO，因此两个哈希都改变。④的二进制不同于①，`go version -m` 的实测结果是 `vcs.revision` 和 `vcs.time` 保持不变，但 `vcs.modified` 从 `false` 变为 `true`（模块构建信息也带 `+dirty`），说明临时修改 Makefile 仍会被 Go 的 VCS 信息记录，不能把二进制差异归因于 tar 时间参数。④⑤的二进制相同而归档不同，因为未固定 tar 的文件修改时间，重写 BUILD_INFO 和二进制的实际时间进入了归档。制品应携带稳定且能追溯的版本、提交、构建号、运行 ID、工具链和目标信息，发布前应要求工作区干净，避免无必要的当前时间、绝对构建路径或随机值破坏重复性。当前 `ci` 把版本编译为 `0.0.0-main`，`release` 则通过 `-ldflags` 把 tag 的版本写进二进制，所以发布时必须再编译，这偏离了跨阶段使用同一个制品的严格“一次构建、多处部署”，代价是额外的编译与测试，以及两次环境和参数可能漂移。对已经生成的某个 Release，部署和回退仍应直接使用同一份附件；Actions 的 Re-run 已执行：运行 [#39423930548](https://github.com/Icecube2017/ops-lab1-4/actions/runs/39423930548) 的 `attempt 1` 与 `attempt 2` 的二进制 sha256 均为 `86679c454ebba3fb0aff9c494a51b9d58a029662ef49eb4ceea98eb7d6ef32ff`，tar.gz 均为 `d14b46feeb1dada940eb701cb384a479a43cfeda41118decfbe2ac48281035dd`；两次的 `run_id` 相同、`run_attempt` 不同（`BUILD_INFO` 不含 `run_attempt`）。该行的输入是 `VERSION=0.0.0-main、BUILD_NO=20、COMMIT=30e1b29`，与 ①–⑤ 不同，所以哈希不同，只用于验证同一运行两次 attempt 的可重复性。
 
 **问题 4：发布与回退。** 假设 v1.0.1 发布后发现缺陷，应当如何处理？为什么不应删除 v1.0.1 的 tag、再用同一版本号重新发布？任务 6 中将服务从 v1.0.1 切换回 v1.0.0 时，使用的是哪个文件，是否需要重新构建？请用两次 `/version` 的输出说明。如果改为从源码重新构建 v1.0.0，得到的文件与原附件是否相同（参考问题 3）？最后，如果有人删除 v1.0.0 的附件，换上一个新文件和对应的新 `.sha256`，`trace.sh` 能否发现？本组在第 4 节记录的值能否发现？可以查阅 GitHub 的 Immutable releases 设置的用途。
 
@@ -240,4 +267,4 @@ trace_exit_code=0
 | Vollerei6 | [#4](https://github.com/Icecube2017/ops-lab1-4/pull/4)；[#3](https://github.com/Icecube2017/ops-lab1-4/pull/3) 已关闭未合入，不计入 | 无已核验记录 |
 | Graham1019 | [#5](https://github.com/Icecube2017/ops-lab1-4/pull/5) | 无已核验记录 |
 | Icecube2017 | 无已核验的本人发起并合入 PR | [#1](https://github.com/Icecube2017/ops-lab1-4/pull/1#pullrequestreview-5533132002)、[#2](https://github.com/Icecube2017/ops-lab1-4/pull/2)、[#4](https://github.com/Icecube2017/ops-lab1-4/pull/4)、[#5](https://github.com/Icecube2017/ops-lab1-4/pull/5)、[#6](https://github.com/Icecube2017/ops-lab1-4/pull/6#pullrequestreview-5585083249) |
-| ConnorAnderson-coding | [#6](https://github.com/Icecube2017/ops-lab1-4/pull/6) | 无已核验记录 |
+| ConnorAnderson-coding | [#6](https://github.com/Icecube2017/ops-lab1-4/pull/6)、[#7](https://github.com/Icecube2017/ops-lab1-4/pull/7) | 无已核验记录 |
