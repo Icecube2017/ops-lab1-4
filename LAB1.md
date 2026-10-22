@@ -1,6 +1,6 @@
 # 实验 1 记录：第 4 组
 
-现场检查时将打开本文件，按其中的链接核对。证据一律以链接或文本形式给出，不要只贴截图。将 `<填写>` 替换为本组的内容。main 受保护之后，修改本文件也须通过 PR。
+现场检查时将打开本文件，按其中的链接核对。证据一律以链接或文本形式给出，不要只贴截图。main 受保护之后，修改本文件也须通过 PR。
 
 ## 1. 基本信息
 
@@ -217,10 +217,7 @@ trace_exit_code=0
 
 所用数据：第 5 节第一轮时间线（PR #1 创建、两次失败、修复提交、修复通过、审批、合入）、7 次 `ci` 时长、PR #1/#4/#5 的提交到发布间隔；第 3 节 PR #4 的三次复测运行；第 5 节第二轮时间线。
 
-两轮演练中，gate 拦住的是第一轮“单周对双周被错误判为冲突”的回归：PR #1 的首次运行因已有断言变红，修复前无法合入；没有拦住的是第二轮 `weeks` 缺失的零值缺陷——它先以 [#38843194354](https://github.com/Icecube2017/ops-lab1-4/actions/runs/38843194354) 通过，补入 `TestRejectsSectionWithoutWeeks` 后才以 [#38844389381](https://github.com/Icecube2017/ops-lab1-4/actions/runs/38844389381) 失败，说明 gate 能执行规则，但是否能发现问题取决于测试覆盖。
-第一轮从发起 PR 到修复通过为 35 分 26 秒，其中首次失败前 33 秒，首次失败结束到修复通过的恢复窗口为 34 分 53 秒。按第 5 节时间戳可拆为：两次 CI 执行 30 s + 31 s = 61 s（2.9%）；第二次失败结束到修复提交 18:07:41 为 5 分 50 秒（16.7%），这是有 Git 记录的人工修改上限；首次失败结束到第二次运行开始 1 分 20 秒（3.8%）；修复提交到成功运行开始 26 分 42 秒（76.5%），其中包含推送前等待、排队和未记录操作。按原记录的自记推送时间 18:34:19，可归为 CI 的只有推送后 4 秒加执行 61 秒，约 65 秒（3.1%）；其余 27 分 58 秒（80.2%）是推送前等待和重触发，其中 26 分 38 秒来自自记值，未取得 GitHub 原始事件，不能当作已复核测量。
-7 次 CI 样本为 20～34 秒、均值 27.7 秒；以该均值除 PR #1/#4/#5 的提交到发布间隔，分别约 0.0065%、0.0075%、0.2394%，说明长间隔主要不在单次自动检查。上述 34 分 53 秒应视为失败造成的成本上限：没有一次首次就通过的同条件对照，不能严格证明全部都是净增成本，而且样本少、共享 runner 有噪声、PR 与 push 步骤不同。
-即使补上零值测试，测试也只能验证已写入断言且在测试环境中执行的情形，未表达的业务规则、生产依赖变化、性能与安全问题仍需审查、集成测试和运行观测；结论还依赖必需检查确实绑定最新提交且没有 bypass。
+两轮演练中，gate 拦住的是第一轮“单周对双周被错误判为冲突”的回归：PR #1 的首次运行因已有断言变红，修复前无法合入；没有拦住的是第二轮 `weeks` 缺失的零值缺陷——它先以 [#38843194354](https://github.com/Icecube2017/ops-lab1-4/actions/runs/38843194354) 通过，补入 `TestRejectsSectionWithoutWeeks` 后才以 [#38844389381](https://github.com/Icecube2017/ops-lab1-4/actions/runs/38844389381) 失败，说明 gate 能执行规则，但是否能发现问题取决于测试覆盖。第一轮从发起 PR 到修复通过为 35 分 26 秒，其中首次失败前 33 秒，首次失败结束到修复通过的恢复窗口为 34 分 53 秒。按第 5 节时间戳可拆为：两次 CI 执行 30 s + 31 s = 61 s（2.9%）；第二次失败结束到修复提交 18:07:41 为 5 分 50 秒（16.7%），这是有 Git 记录的人工修改上限；首次失败结束到第二次运行开始 1 分 20 秒（3.8%）；修复提交到成功运行开始 26 分 42 秒（76.5%），其中包含推送前等待、排队和未记录操作。按原记录的自记推送时间 18:34:19，可归为 CI 的只有推送后 4 秒加执行 61 秒，约 65 秒（3.1%）；其余 27 分 58 秒（80.2%）是推送前等待和重触发，其中 26 分 38 秒来自自记值，未取得 GitHub 原始事件，不能当作已复核测量。7 次 CI 样本为 20～34 秒、均值 27.7 秒；以该均值除 PR #1/#4/#5 的提交到发布间隔，分别约 0.0065%、0.0075%、0.2394%，说明长间隔主要不在单次自动检查。上述 34 分 53 秒应视为失败造成的成本上限：没有一次首次就通过的同条件对照，不能严格证明全部都是净增成本，而且样本少、共享 runner 有噪声、PR 与 push 步骤不同。即使补上零值测试，测试也只能验证已写入断言且在测试环境中执行的情形，未表达的业务规则、生产依赖变化、性能与安全问题仍需审查、集成测试和运行观测；结论还依赖必需检查确实绑定最新提交且没有 bypass。
 
 **问题 2：PR 中的构建与 main 上的构建。** 在 PR 触发的运行日志中，`github.sha` 与 `pull_request.head.sha` 是否相同？它们能否在 main 的历史中找到？答案与合并方式有关，请写明本组使用的方式。合并之后，main 上这次改动的提交号是哪个？据此说明，为什么待发布的制品只能从 main 上的提交或 tag 构建。
 
@@ -266,5 +263,5 @@ trace_exit_code=0
 | sugeladi2450 | [#1](https://github.com/Icecube2017/ops-lab1-4/pull/1)、[#2](https://github.com/Icecube2017/ops-lab1-4/pull/2) | 无已核验记录 |
 | Vollerei6 | [#4](https://github.com/Icecube2017/ops-lab1-4/pull/4)；[#3](https://github.com/Icecube2017/ops-lab1-4/pull/3) 已关闭未合入，不计入 | 无已核验记录 |
 | Graham1019 | [#5](https://github.com/Icecube2017/ops-lab1-4/pull/5) | 无已核验记录 |
-| Icecube2017 | 无已核验的本人发起并合入 PR | [#1](https://github.com/Icecube2017/ops-lab1-4/pull/1#pullrequestreview-5533132002)、[#2](https://github.com/Icecube2017/ops-lab1-4/pull/2)、[#4](https://github.com/Icecube2017/ops-lab1-4/pull/4)、[#5](https://github.com/Icecube2017/ops-lab1-4/pull/5)、[#6](https://github.com/Icecube2017/ops-lab1-4/pull/6#pullrequestreview-5585083249) |
-| ConnorAnderson-coding | [#6](https://github.com/Icecube2017/ops-lab1-4/pull/6)、[#7](https://github.com/Icecube2017/ops-lab1-4/pull/7) | 无已核验记录 |
+| ConnorAnderson-coding | [#6](https://github.com/Icecube2017/ops-lab1-4/pull/6)、[#7](https://github.com/Icecube2017/ops-lab1-4/pull/7) | [#8](https://github.com/Icecube2017/ops-lab1-4/pull/8#pullrequestreview-5609091005) |
+| Icecube2017 | [#8](https://github.com/Icecube2017/ops-lab1-4/pull/8) | [#1](https://github.com/Icecube2017/ops-lab1-4/pull/1#pullrequestreview-5533132002)、[#2](https://github.com/Icecube2017/ops-lab1-4/pull/2)、[#4](https://github.com/Icecube2017/ops-lab1-4/pull/4)、[#5](https://github.com/Icecube2017/ops-lab1-4/pull/5)、[#6](https://github.com/Icecube2017/ops-lab1-4/pull/6#pullrequestreview-5585083249) |
