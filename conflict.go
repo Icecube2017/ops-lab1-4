@@ -31,7 +31,7 @@ func (s Section) Valid() bool {
 	// 	return true
 	// }
 	weeks := s.Weeks
-	if weeks == ""{
+	if weeks == "" {
 		weeks = AllWeeks
 	}
 	switch weeks {
