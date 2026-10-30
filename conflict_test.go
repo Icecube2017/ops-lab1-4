@@ -35,15 +35,15 @@ func TestConflicts(t *testing.T) {
 }
 
 // weeks 是必填字段：JSON 中省略它时得到零值空串，不能当成一个合法的周次取值。
-// func TestRejectsSectionWithoutWeeks(t *testing.T) {
-// 	empty := Section{Weekday: 1, Start: 1, End: 2}
-// 	if empty.Weeks != "" {
-// 		t.Fatalf("前提错误：%+v 的 weeks 应为零值", empty)
-// 	}
-// 	if empty.Valid() {
-// 		t.Errorf("weeks 缺失（零值）时应判为不合法：%+v", empty)
-// 	}
-// }
+func TestRejectsSectionWithoutWeeks(t *testing.T) {
+	empty := Section{Weekday: 1, Start: 1, End: 2}
+	if empty.Weeks != "" {
+		t.Fatalf("前提错误：%+v 的 weeks 应为零值", empty)
+	}
+	if empty.Valid() {
+		t.Errorf("weeks 缺失（零值）时应判为不合法：%+v", empty)
+	}
+}
 
 func TestValid(t *testing.T) {
 	good := Section{Weekday: 3, Start: 1, End: 2, Weeks: EvenWeeks}
